@@ -1,215 +1,1028 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Zeniscale - Social Media & intelligente Automatisierung für lokale Unternehmen</title>
-  <link rel="icon" type="image/png" href="favicon_zeniscale.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zeniscale - KI-Automatisierung, die verkauft</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink:    { DEFAULT: '#0A0A0A', 100: '#111111', 200: '#161616', 300: '#1E1E1E', 400: '#2A2A2A', 500: '#3A3A3A' },
+            chalk:  { DEFAULT: '#F0F0F0', muted: '#8A8A8A', faint: '#3A3A3A' },
+          },
+          fontFamily: {
+            display: ['"Instrument Serif"', 'Georgia', 'serif'],
+            body:    ['"DM Sans"', 'system-ui', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: #0A0A0A;
+      color: #F0F0F0;
+      font-family: 'DM Sans', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      margin: 0;
+    }
+
+    /* Grain texture */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-size: 128px 128px;
+    }
+
+    /* Nav link hover */
+    .nav-link {
+      color: #8A8A8A;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
+      text-decoration: none;
+    }
+    .nav-link:hover { color: #F0F0F0; }
+
+    /* Section tags */
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #FFFFFF;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 4px 12px;
+      border-radius: 100px;
+    }
+
+    /* FAQ */
+    details summary { list-style: none; cursor: pointer; }
+    details summary::-webkit-details-marker { display: none; }
+    details[open] .faq-chevron { transform: rotate(180deg); }
+    .faq-chevron { transition: transform 0.25s ease; }
+    details[open] { border-color: rgba(255,107,53,0.3); }
+    details[open] summary span { color: #FFFFFF; }
+
+    /* Buttons */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #FFFFFF;
+      color: #0A0A0A;
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 12px 24px;
+      border-radius: 100px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.15s ease;
+      text-decoration: none;
+    }
+    .btn-primary:hover { background: rgba(255,255,255,0.9); transform: translateY(-1px); }
+    .btn-primary:active { transform: translateY(0); }
+    .btn-primary:focus-visible { outline: 2px solid #FFFFFF; outline-offset: 3px; }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: #F0F0F0;
+      font-weight: 500;
+      font-size: 0.9rem;
+      padding: 11px 24px;
+      border-radius: 100px;
+      border: 1px solid #3A3A3A;
+      cursor: pointer;
+      transition: border-color 0.2s ease, background 0.2s ease;
+      text-decoration: none;
+    }
+    .btn-ghost:hover { border-color: #8A8A8A; background: rgba(255,255,255,0.04); }
+    .btn-ghost:focus-visible { outline: 2px solid rgba(255,255,255,0.5); outline-offset: 3px; }
+
+    /* Phone mockup */
+    .phone-mockup {
+      background: #111;
+      border: 1px solid #2a2a2a;
+      border-radius: 40px;
+      overflow: hidden;
+      box-shadow: 0 48px 96px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.06), inset 0 1px 0 rgba(255,255,255,0.08);
+      width: 260px;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #111; }
+    ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+
+    /* Mini chart bars animation */
+    @keyframes barGrow {
+      from { transform: scaleY(0); }
+      to   { transform: scaleY(1); }
+    }
+    .bar-animate { transform-origin: bottom; animation: barGrow 0.6s ease forwards; }
+
+    /* Sparkle animation */
+    @keyframes sparkle {
+      0%, 100% { opacity: 1; transform: scale(1) rotate(0deg); }
+      50%       { opacity: 0.6; transform: scale(1.15) rotate(15deg); }
+    }
+    .sparkle { animation: sparkle 3s ease-in-out infinite; }
+    .sparkle-2 { animation: sparkle 3s ease-in-out 1s infinite; }
+
+    /* Bento card hover */
+    .bento-card {
+      position: relative;
+      padding: 28px;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: #0E0E0E;
+      transition: border-color 0.3s ease, transform 0.3s ease;
+      --glow-x: -9999px;
+      --glow-y: -9999px;
+    }
+    .bento-card:hover {
+      border-color: rgba(255,255,255,0.18);
+      transform: translateY(-2px);
+    }
+    /* Mouse-following glow on every card */
+    .bento-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      background: radial-gradient(320px circle at var(--glow-x) var(--glow-y), rgba(255,255,255,0.07), transparent 65%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .bento-card > * { position: relative; z-index: 1; }
+    .bento-card-featured {
+      position: relative;
+      padding: 28px;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: #0E0E0E;
+      transition: border-color 0.3s ease, transform 0.3s ease;
+      --glow-x: -9999px;
+      --glow-y: -9999px;
+    }
+    .bento-card-featured:hover {
+      border-color: rgba(255,255,255,0.25);
+      transform: translateY(-2px);
+    }
+    .bento-card-featured::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      background: radial-gradient(320px circle at var(--glow-x) var(--glow-y), rgba(255,255,255,0.07), transparent 65%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .bento-card-featured > * { position: relative; z-index: 1; }
+
+    .bento-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,0.08);
+    }
+    .bento-tag {
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.4);
+      font-size: 0.75rem;
+    }
+    .bento-pill {
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.5);
+      font-size: 0.75rem;
+    }
+    .bento-status {
+      font-size: 0.7rem;
+      font-weight: 500;
+      padding: 4px 10px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.5);
+    }
+  </style>
 </head>
 <body>
 
-<div id="successPopup" style="display:none;position:fixed;inset:0;z-index:200;background:rgba(6,6,6,0.85);backdrop-filter:blur(16px);align-items:center;justify-content:center;">
-  <div style="background:var(--bg2);border:1px solid rgba(255,255,255,0.08);border-radius:24px;padding:3rem 2.5rem;max-width:440px;width:90%;text-align:center;position:relative;overflow:hidden;">
-    <div style="position:absolute;inset:-1px;border-radius:24px;padding:1px;background:linear-gradient(160deg,rgba(212,255,43,0.3),transparent 40%,transparent 60%,rgba(212,255,43,0.1));-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;"></div>
-    <div style="width:56px;height:56px;border-radius:50%;background:var(--accent-dim);border:1px solid rgba(212,255,43,0.15);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#D4FF2B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-    </div>
-    <h3 style="font-family:var(--serif);font-size:1.6rem;margin-bottom:0.75rem;letter-spacing:-0.02em;">Nachricht erhalten</h3>
-    <p style="color:var(--text-muted);font-size:0.95rem;font-weight:300;line-height:1.7;margin-bottom:2rem;">Danke für deine Anfrage. Wir melden uns innerhalb von 24 Stunden bei dir.</p>
-    <button onclick="closePopup()" class="btn-primary" style="width:100%;">Alles klar</button>
-  </div>
-</div>
+<!-- ══════════════════════════════════════════
+     NAV
+══════════════════════════════════════════ -->
+<nav style="position:sticky;top:0;z-index:100;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);background:rgba(10,10,10,0.85);border-bottom:1px solid rgba(255,255,255,0.06);">
+  <div style="max-width:1200px;margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:64px;">
+    <!-- Logo -->
+    <a href="#" style="display:flex;align-items:center;flex-shrink:0;">
+      <svg viewBox="0 0 360 72" height="56" style="display:block;">
+  <defs>
+    <filter id="gl-nav" x="-30%" y="-50%" width="160%" height="200%"><feGaussianBlur in="SourceGraphic" stdDeviation="7" result="b"/><feComposite in="SourceGraphic" in2="b" operator="over"/></filter>
+    <filter id="gll-nav" x="-20%" y="-400%" width="140%" height="900%"><feGaussianBlur in="SourceGraphic" stdDeviation="6"/></filter>
+  </defs>
+  <rect x="30" y="57" width="230" height="2.5" rx="1.25" fill="#FFFFFF" opacity="0.1" filter="url(#gll-nav)"/>
+  <rect x="30" y="58" width="230" height="1.5" rx="0.75" fill="#FFFFFF" opacity="0.25"/>
+  <text filter="url(#gl-nav)" x="30" y="50" font-family="Georgia,'Instrument Serif',serif" font-size="34" font-weight="400" font-style="italic" fill="#F5F0E8" letter-spacing="-0.5">zeni</text>
+  <text x="30" y="50" font-family="Georgia,'Instrument Serif',serif" font-size="34" font-weight="400" font-style="italic" fill="#F5F0E8" letter-spacing="-0.5">zeni</text>
+  <text filter="url(#gl-nav)" x="103" y="50" font-family="'DM Sans',sans-serif" font-size="32" font-weight="600" fill="#FFFFFF" letter-spacing="-1">scale</text>
+  <text x="103" y="50" font-family="'DM Sans',sans-serif" font-size="32" font-weight="600" fill="#FFFFFF" letter-spacing="-1">scale</text>
+</svg>
+    </a>
 
-<nav>
-  <div class="logo" onclick="goTo('home')">
-    <svg viewBox="0 0 360 72" height="48">
-      <defs><filter id="gl" x="-30%" y="-50%" width="160%" height="200%"><feGaussianBlur in="SourceGraphic" stdDeviation="7" result="b"/><feComposite in="SourceGraphic" in2="b" operator="over"/></filter><filter id="gll" x="-20%" y="-400%" width="140%" height="900%"><feGaussianBlur in="SourceGraphic" stdDeviation="6"/></filter></defs>
-      <rect x="30" y="57" width="230" height="2.5" rx="1.25" fill="#D4FF2B" opacity="0.1" filter="url(#gll)"/>
-      <rect x="30" y="58" width="230" height="1.5" rx="0.75" fill="#D4FF2B" opacity="0.25"/>
-      <text filter="url(#gl)" x="30" y="50" font-family="Georgia,'Instrument Serif',serif" font-size="34" font-weight="400" font-style="italic" fill="#F5F0E8" letter-spacing="-0.5">zeni</text>
-      <text x="30" y="50" font-family="Georgia,'Instrument Serif',serif" font-size="34" font-weight="400" font-style="italic" fill="#F5F0E8" letter-spacing="-0.5">zeni</text>
-      <text filter="url(#gl)" x="103" y="50" font-family="'DM Sans',sans-serif" font-size="32" font-weight="600" fill="#D4FF2B" letter-spacing="-1">scale</text>
-      <text x="103" y="50" font-family="'DM Sans',sans-serif" font-size="32" font-weight="600" fill="#D4FF2B" letter-spacing="-1">scale</text>
-    </svg>
+    <!-- Nav links -->
+    <div style="display:flex;align-items:center;gap:36px;">
+      <a href="#produkt" class="nav-link">Leistungen</a>
+      <a href="#faq" class="nav-link">FAQ</a>
+      <a href="#kontakt" class="nav-link">Kontakt</a>
+    </div>
+
+    <!-- CTA -->
+    <a href="#kontakt" class="btn-primary" style="padding:10px 20px;font-size:0.85rem;">
+      Kostenlos starten
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
   </div>
-  <div class="nav-links">
-    <a onclick="goTo('services')" data-page="services">Leistungen</a>
-    <a onclick="goTo('about')" data-page="about">Über uns</a>
-    <a onclick="goTo('process')" data-page="process">Ablauf</a>
-    <a onclick="goTo('contact')" class="nav-cta">Kontakt</a>
-  </div>
-  <button class="nav-burger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
 </nav>
 
-<div class="mobile-menu" id="mobileMenu">
-  <a onclick="goTo('home')">Home</a>
-  <a onclick="goTo('services')">Leistungen</a>
-  <a onclick="goTo('about')">Über uns</a>
-  <a onclick="goTo('process')">Ablauf</a>
-  <a onclick="goTo('contact')">Kontakt</a>
-</div>
 
-<div class="page active" id="page-home">
-  <section style="min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:8rem 2rem 4rem;position:relative;">
-    <div style="position:absolute;top:5%;left:50%;transform:translateX(-50%);width:1000px;height:600px;background:radial-gradient(ellipse at center,rgba(212,255,43,0.045) 0%,rgba(212,255,43,0.01) 40%,transparent 70%);pointer-events:none;"></div>
-    <div style="display:inline-flex;align-items:center;gap:0.6rem;padding:0.45rem 1.1rem 0.45rem 0.8rem;border:1px solid rgba(212,255,43,0.15);border-radius:100px;font-size:0.78rem;font-weight:500;color:var(--accent);margin-bottom:3rem;background:var(--accent-dim);animation:fadeUp 1s cubic-bezier(0.16,1,0.3,1) both;">
-      <div style="width:6px;height:6px;background:var(--accent);border-radius:50%;box-shadow:0 0 8px rgba(212,255,43,0.6);animation:pulse 2.5s ease infinite;"></div>
-      Jetzt verfügbar in Norddeutschland!!
-    </div>
-    <h1 style="font-family:var(--serif);font-size:clamp(3.2rem,7.5vw,6rem);line-height:1.02;letter-spacing:-0.035em;max-width:850px;margin-bottom:1.75rem;animation:fadeUp 1s cubic-bezier(0.16,1,0.3,1) 0.12s both;">Mehr Kunden.<br><em style="font-style:italic;color:var(--accent);">Weniger Aufwand.</em></h1>
-    <p style="font-size:1.1rem;font-weight:300;color:var(--text-muted);max-width:480px;line-height:1.75;margin-bottom:3rem;animation:fadeUp 1s cubic-bezier(0.16,1,0.3,1) 0.24s both;">Wir machen lokale Unternehmen online sichtbar und automatisieren eure Kundenkommunikation mit intelligenter Technologie.</p>
-    <div class="hero-buttons" style="display:flex;gap:1rem;align-items:center;animation:fadeUp 1s cubic-bezier(0.16,1,0.3,1) 0.36s both;">
-      <a class="btn-primary" onclick="goTo('contact')">Kostenloses Erstgespräch →</a>
-      <a class="btn-secondary" onclick="goTo('services')">Unsere Leistungen</a>
-    </div>
-  </section>
-  <div class="marquee-wrap"><div class="marquee-track"><span class="marquee-item">Social Media</span><span class="marquee-item">Automatisierung</span><span class="marquee-item">Content-Produktion</span><span class="marquee-item">Google Sichtbarkeit</span><span class="marquee-item">Telefonassistent</span><span class="marquee-item">Terminbuchung</span><span class="marquee-item">Social Media</span><span class="marquee-item">Automatisierung</span><span class="marquee-item">Content-Produktion</span><span class="marquee-item">Google Sichtbarkeit</span><span class="marquee-item">Telefonassistent</span><span class="marquee-item">Terminbuchung</span><span class="marquee-item">Social Media</span><span class="marquee-item">Automatisierung</span><span class="marquee-item">Content-Produktion</span><span class="marquee-item">Google Sichtbarkeit</span><span class="marquee-item">Telefonassistent</span><span class="marquee-item">Terminbuchung</span><span class="marquee-item">Social Media</span><span class="marquee-item">Automatisierung</span><span class="marquee-item">Content-Produktion</span><span class="marquee-item">Google Sichtbarkeit</span><span class="marquee-item">Telefonassistent</span><span class="marquee-item">Terminbuchung</span><span class="marquee-item">Social Media</span><span class="marquee-item">Automatisierung</span><span class="marquee-item">Content-Produktion</span><span class="marquee-item">Google Sichtbarkeit</span><span class="marquee-item">Telefonassistent</span><span class="marquee-item">Terminbuchung</span><span class="marquee-item">Social Media</span><span class="marquee-item">Automatisierung</span><span class="marquee-item">Content-Produktion</span><span class="marquee-item">Google Sichtbarkeit</span><span class="marquee-item">Telefonassistent</span><span class="marquee-item">Terminbuchung</span></div></div>
-  <div style="padding:5rem 2rem;max-width:1000px;margin:0 auto;" class="reveal"><div class="stats-grid"><div class="stat-card"><div class="stat-num">24/7</div><div class="stat-label">Erreichbarkeit</div></div><div class="stat-card"><div class="stat-num">3×</div><div class="stat-label">Mehr Online-Anfragen</div></div><div class="stat-card"><div class="stat-num">0</div><div class="stat-label">Verpasste Anrufe</div></div></div></div>
-  <div class="section-wrap">
-    <div class="section-label reveal">Leistungen</div>
-    <h2 class="section-title reveal reveal-d1">Alles, was dein Business<br>online braucht.</h2>
-    <p class="section-desc reveal reveal-d2">Von professionellem Content bis zur automatisierten Kundenkommunikation. Wir übernehmen das für dich.</p>
-    <div class="card-grid card-grid-2">
-      <div class="card reveal"><div class="card-icon"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="18" cy="6" r="1.5" fill="var(--accent)" stroke="none"/></svg></div><h3>Social Media Management</h3><p>Wir erstellen den Content, der zu deinem Unternehmen passt. Posts, Reels und Stories, komplett von uns geplant und produziert.</p></div>
-      <div class="card reveal reveal-d1"><div class="card-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.81.36 1.6.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c1.21.34 2 .57 2.81.7A2 2 0 0122 16.92z"/></svg></div><h3>Digitaler Telefonassistent</h3><p>Dein intelligenter Mitarbeiter am Telefon nimmt Anrufe entgegen, beantwortet Fragen und bucht Termine, auch wenn du gerade beim Kunden bist.</p></div>
-      <div class="card reveal reveal-d2"><div class="card-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div><h3>Google & Sichtbarkeit</h3><p>Wir bringen dein Unternehmen in die Google-Suchergebnisse, damit neue Kunden dich finden, genau dann, wenn sie nach deiner Leistung suchen.</p></div>
-      <div class="card reveal reveal-d3"><div class="card-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><h3>Smarte Automatisierung</h3><p>Terminbestätigungen, Follow-ups und Angebotsversand laufen automatisch im Hintergrund. Du sparst Stunden jede Woche.</p></div>
-    </div>
-    <div style="text-align:center;margin-top:3rem;" class="reveal"><a class="btn-secondary" onclick="goTo('services')">Alle Leistungen im Detail →</a></div>
-  </div>
-  <div style="padding:3rem 2rem;max-width:700px;margin:0 auto;text-align:center;" class="reveal"><p style="font-family:var(--serif);font-size:clamp(1.4rem,3vw,1.8rem);font-style:italic;color:var(--text-muted);line-height:1.5;">Wir sind überzeugt, dass <span style="color:var(--text);">jeder lokale Betrieb</span> die gleichen Werkzeuge verdient wie die großen Unternehmen, <span style="color:var(--text);">nur einfacher.</span></p></div>
-  <section class="cta-section"><div class="cta-box reveal"><div class="cta-glow"></div><h2>Lass uns gemeinsam<br>loslegen.</h2><p class="cta-desc">Im kostenfreien Erstgespräch analysieren wir gemeinsam dein Unternehmen und zeigen dir, was wirklich möglich ist.</p><a class="btn-primary" onclick="goTo('contact')">Jetzt Kontakt aufnehmen →</a><p class="cta-contact">Oder direkt: <a href="tel:+4900000000">+49 (0) 000 000 000</a></p></div></section>
-</div>
+<!-- ══════════════════════════════════════════
+     HERO
+══════════════════════════════════════════ -->
+<section style="max-width:1200px;margin:0 auto;padding:96px 32px 120px;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;">
 
-<div class="page" id="page-services">
-  <div class="page-header"><h1>Unsere <em>Leistungen</em></h1><p>Professionelle Online-Präsenz und intelligente Automatisierung, damit du dich auf das konzentrieren kannst, was du am besten machst.</p></div>
-  <div class="section-wrap" style="padding-top:2rem;">
-    <div class="detail-list">
-      <div class="detail-item reveal"><div class="detail-label"><em>Social Media</em> Management</div><div class="detail-body"><p>Komplette Betreuung für dein Instagram, Facebook und Googleprofil. Wir erstellen monatlich hochwertigen Content, der zu deinem Unternehmen passt und die richtigen Leute anspricht. Keine Stockfotos, nur individuell auf dein Unternehmen zugeschnitten.</p><p>Du schickst uns gelegentlich ein paar Fotos oder kurze Videos per WhatsApp wir machen daraus professionelle Posts und Reels. Planung, Erstellung, Veröffentlichung: alles in unserer Hand.</p><div class="detail-tags"><span class="tag">Instagram</span><span class="tag">Facebook</span><span class="tag">Google Business</span><span class="tag">Content-Planung</span><span class="tag">Reels & Stories</span></div></div></div>
-      <div class="detail-item reveal"><div class="detail-label"><em>Digitaler</em> Telefonassistent</div><div class="detail-body"><p>Stell dir vor, du verpasst keinen Anruf mehr, egal ob du einen Kunden bedienst oder Feierabend hast. Unser digitaler Assistent nimmt Anrufe für dich entgegen, beantwortet die häufigsten Fragen und bucht Termine direkt in deinen Kalender.</p><p>Er klingt natürlich und professionell und wird individuell auf dein Unternehmen eingestellt. Deine Öffnungszeiten, deine Leistungen, dein Stil.</p><div class="detail-tags"><span class="tag">24/7 erreichbar</span><span class="tag">Terminbuchung</span><span class="tag">FAQ-Beantwortung</span><span class="tag">Anrufweiterleitung</span><span class="tag">Deutschsprachig</span></div></div></div>
-      <div class="detail-item reveal"><div class="detail-label"><em>Google</em> & Sichtbarkeit</div><div class="detail-body"><p>Die meisten deiner potenziellen Kunden suchen auf Google, bevor sie sich für einen Anbieter entscheiden. Wir optimieren dein Google-Unternehmensprofil so, dass du bei den relevanten Suchanfragen in deiner Region ganz oben auftauchst.</p><p>Mehr Anrufe, mehr Webseitenbesuche, mehr Laufkundschaft!! ohne dass du einen Cent für Werbeanzeigen ausgeben musst.</p><div class="detail-tags"><span class="tag">Google Maps</span><span class="tag">Bewertungsmanagement</span><span class="tag">Lokale SEO</span><span class="tag">Branchenverzeichnisse</span></div></div></div>
-      <div class="detail-item reveal"><div class="detail-label"><em>Smarte</em> Automatisierung</div><div class="detail-body"><p>Jede Minute, die du mit Papierkram, E-Mails und Terminbestätigungen verbringst, ist eine Minute weniger für deine Kunden. Wir richten automatische Abläufe für dich ein: Terminbestätigungen per SMS, Follow-up-Nachrichten nach dem Besuch, Angebotsversand und mehr.</p><p>Das spart dir nicht nur Zeit, es sorgt auch dafür, dass kein Kunde mehr durch die Lücken fällt.</p><div class="detail-tags"><span class="tag">Terminbestätigungen</span><span class="tag">Follow-ups</span><span class="tag">E-Mail-Automatisierung</span><span class="tag">Angebotsversand</span></div></div></div>
+  <!-- Left -->
+  <div>
+    <div class="section-tag" style="margin-bottom:24px;">
+      <span style="width:6px;height:6px;border-radius:50%;background:#FFFFFF;display:inline-block;"></span>
+      KI-Telefonassistent
     </div>
-  </div>
-  <section class="cta-section"><div class="cta-box reveal"><div class="cta-glow"></div><h2>Klingt interessant?</h2><p class="cta-desc">Lass uns gemeinsam herausfinden, welche Leistungen für dein Business den größten Unterschied machen.</p><a class="btn-primary" onclick="goTo('contact')">Kostenloses Erstgespräch →</a></div></section>
-</div>
 
-<div class="page" id="page-about">
-  <div class="page-header"><h1>Über <em>uns</em></h1><p>Wir bringen lokale Unternehmen mit professionellem Marketing und intelligenter Technologie nach vorne, die im Hintergrund für dich arbeitet.</p></div>
-  <div class="section-wrap" style="padding-top:2rem;">
-    <div class="reveal" style="max-width:680px;margin-bottom:4rem;">
-      <h2 class="section-title" style="margin-bottom:1.5rem;">Das Problem</h2>
-      <p style="color:var(--text-muted);font-size:1rem;font-weight:300;line-height:1.8;margin-bottom:1rem;">Du weißt, dass du online präsent sein solltest. Aber zwischen Kundenterminen, Telefonaten und Tagesgeschäft bleibt dafür keine Zeit. Das Ergebnis: ein veralteter Online-Auftritt, ein leeres Instagram-Profil und potenzielle Kunden, die dich nie finden.</p>
-      <p style="color:var(--text-muted);font-size:1rem;font-weight:300;line-height:1.8;">Gleichzeitig verpasst du Anrufe während du arbeitest, Termine werden vergessen, und Follow-ups bleiben liegen. Nicht weil es dir egal ist, sondern weil der Tag einfach nicht genug Stunden hat.</p>
-    </div>
-    <div class="reveal" style="max-width:680px;margin-bottom:4rem;">
-      <h2 class="section-title" style="margin-bottom:1.5rem;">Unsere <em style="font-style:italic;color:var(--accent);">Lösung</em></h2>
-      <p style="color:var(--text-muted);font-size:1rem;font-weight:300;line-height:1.8;margin-bottom:1rem;">Wir übernehmen deinen kompletten Online-Auftritt und richten gleichzeitig intelligente Systeme ein, die deine Kundenkommunikation automatisieren. Du bekommst ein Rundum-Paket, das sonst nur größere Unternehmen mit eigener Marketing-Abteilung haben.</p>
-      <p style="color:var(--text-muted);font-size:1rem;font-weight:300;line-height:1.8;">Der Unterschied: Du musst dich um nichts kümmern. Wir machen das.</p>
-    </div>
-    <div class="card-grid card-grid-3 reveal" style="margin-bottom:4rem;">
-      <div class="card" style="text-align:center;"><div style="font-family:var(--serif);font-size:2.5rem;color:var(--accent);margin-bottom:1rem;">01</div><h3>Professionell</h3><p>Content und Systeme, die dein Unternehmen so präsentieren, wie es es verdient, authentisch und hochwertig.</p></div>
-      <div class="card" style="text-align:center;"><div style="font-family:var(--serif);font-size:2.5rem;color:var(--accent);margin-bottom:1rem;">02</div><h3>Automatisiert</h3><p>Intelligente Technologie, die rund um die Uhr für dich arbeitet, ohne dass du etwas davon mitbekommst.</p></div>
-      <div class="card" style="text-align:center;"><div style="font-family:var(--serif);font-size:2.5rem;color:var(--accent);margin-bottom:1rem;">03</div><h3>Persönlich</h3><p>Wir sind keine anonyme Agentur, du hast jederzeit einen direkten Ansprechpartner, der dein Business kennt.</p></div>
-    </div>
-    <div class="reveal" style="max-width:680px;">
-      <h2 class="section-title" style="margin-bottom:1.5rem;">Für wen wir arbeiten</h2>
-      <p style="color:var(--text-muted);font-size:1rem;font-weight:300;line-height:1.8;margin-bottom:1.5rem;">Wir arbeiten mit lokalen Betrieben, die mehr Kunden erreichen wollen, ohne selbst zum Marketing-Experten werden zu müssen.</p>
-      <div class="detail-tags"><span class="tag">Handwerksbetriebe</span><span class="tag">Arzt- & Zahnarztpraxen</span><span class="tag">Friseure & Barbershops</span><span class="tag">Restaurants & Cafés</span><span class="tag">Fitnessstudios</span><span class="tag">Kosmetik & Wellness</span><span class="tag">Einzelhandel</span><span class="tag">Immobilienmakler</span></div>
-    </div>
-  </div>
-  <section class="cta-section"><div class="cta-box reveal"><div class="cta-glow"></div><h2>Passt das zu dir?</h2><p class="cta-desc">Erzähl uns kurz von deinem Business und wir sagen dir ehrlich, ob und wie wir helfen können.</p><a class="btn-primary" onclick="goTo('contact')">Erstgespräch vereinbaren →</a></div></section>
-</div>
+    <h1 style="font-family:'DM Sans',sans-serif;font-size:clamp(2.4rem,4vw,3.5rem);font-weight:700;line-height:1.1;letter-spacing:-0.03em;color:#F0F0F0;margin:0 0 20px;">
+      Kein Anruf<br/>mehr verloren.
+    </h1>
 
-<div class="page" id="page-process">
-  <div class="page-header"><h1>Der <em>Ablauf</em></h1><p>Von der ersten Nachricht bis zum fertigen System, in vier klaren Schritten. Kein Fachchinesisch!!, kein Technik-Stress.</p></div>
-  <div class="section-wrap" style="padding-top:2rem;">
-    <div class="detail-list">
-      <div class="detail-item reveal"><div class="detail-label"><em>01</em> - Erstgespräch!!</div><div class="detail-body"><p>Wir schauen uns gemeinsam an, wo dein Unternehmen online steht. Persönlich, telefonisch oder per Videocall. Was läuft schon? Was fehlt? Wo liegt das größte Potenzial?</p><p>Danach bekommst du von uns eine ehrliche Einschätzung und einen konkreten Vorschlag. Kein Verkaufsdruck, kein Kleingedrucktes.</p><div class="detail-tags"><span class="tag">Kostenlos</span><span class="tag">Unverbindlich</span><span class="tag">ca. 30 Minuten</span></div></div></div>
-      <div class="detail-item reveal"><div class="detail-label"><em>02</em> - Strategie</div><div class="detail-body"><p>Basierend auf unserem Gespräch erstellen wir einen individuellen Plan für dein Business. Welche Kanäle machen Sinn? Welche Art von Content passt zu dir? Wo können wir direkt automatisieren?</p><p>Du bekommst einen klaren Fahrplan, kein 50-seitiges PDF, sondern eine übersichtliche Zusammenfassung, die du verstehst und hinter der du stehen kannst.</p><div class="detail-tags"><span class="tag">Individuell</span><span class="tag">Verständlich</span><span class="tag">Umsetzbar</span></div></div></div>
-      <div class="detail-item reveal"><div class="detail-label"><em>03</em> - Setup</div><div class="detail-body"><p>Wir richten alles für dich ein: Social-Media-Profile werden optimiert, Content-Vorlagen erstellt, der Telefonassistent wird auf dein Business eingestellt, dein Google-Profil aufpoliert.</p><p>Das dauert in der Regel 5-7 Werktage. Du musst dafür kaum etwas tun, wir melden uns, wenn wir etwas von dir brauchen.</p><div class="detail-tags"><span class="tag">5–7 Werktage</span><span class="tag">Alles inklusive</span><span class="tag">Minimaler Aufwand für dich</span></div></div></div>
-      <div class="detail-item reveal"><div class="detail-label"><em>04</em> - Wachstum</div><div class="detail-body"><p>Ab hier läuft alles. Dein Content wird regelmäßig veröffentlicht, der Assistent nimmt Anrufe entgegen, und dein Google-Profil zieht neue Kunden an. Wir kümmern uns im Hintergrund um alles.</p><p>Jeden Monat bekommst du einen kurzen Report: wie viele neue Follower, wie viele Anrufe über den Assistenten, wie viele Anfragen über Google. Damit du schwarz auf weiß siehst, was sich tut.</p><div class="detail-tags"><span class="tag">Monatliche Reports</span><span class="tag">Laufende Optimierung</span><span class="tag">Persönlicher Ansprechpartner</span></div></div></div>
-    </div>
-  </div>
-  <section class="cta-section"><div class="cta-box reveal"><div class="cta-glow"></div><h2>Klingt unkompliziert?<br>Ist es auch.</h2><p class="cta-desc">Der erste Schritt ist ein kurzes Gespräch. Alles andere übernehmen wir.</p><a class="btn-primary" onclick="goTo('contact')">Erstgespräch buchen →</a></div></section>
-</div>
+    <p style="font-size:1.05rem;line-height:1.75;color:#8A8A8A;margin:0 0 36px;max-width:420px;">
+      Ihr KI-Rezeptionist nimmt ab, qualifiziert und bucht. Rund um die Uhr.
+    </p>
 
-<div class="page" id="page-contact">
-  <div class="page-header"><h1>Lass uns <em>reden</em></h1><p>Schreib uns eine kurze Nachricht oder ruf direkt an. Das Erstgespräch ist immer kostenlos und unverbindlich.</p></div>
-  <div class="section-wrap" style="padding-top:1rem;">
-    <form class="form-grid reveal" id="contactForm" onsubmit="handleSubmit(event)">
-      <input type="text" placeholder="Vorname *" required>
-      <input type="text" placeholder="Nachname *" required>
-      <input type="email" placeholder="E-Mail-Adresse *" required class="full">
-      <input type="tel" placeholder="Telefonnummer *" required class="full">
-      <input type="text" placeholder="Dein Unternehmen *" required class="full">
-      <select class="full" required><option value="" disabled selected>Wofür interessierst du dich? *</option><option>Social Media Management</option><option>Digitaler Telefonassistent</option><option>Google & Sichtbarkeit</option><option>Automatisierungen</option><option>Komplettpaket</option><option>Bin mir noch unsicher</option></select>
-      <textarea placeholder="Erzähl uns kurz von deinem Business&#10;Was machst du und wobei können wir helfen? *" class="full" required></textarea>
-      <div class="form-btn-wrap"><button class="btn-primary" type="submit">Nachricht senden →</button></div>
-    </form>
-    <div style="text-align:center;margin-top:4rem;padding:3rem 0;border-top:1px solid rgba(255,255,255,0.04);" class="reveal">
-      <p style="color:var(--text-muted);font-size:0.95rem;font-weight:300;margin-bottom:1.5rem;">Oder direkt Kontakt aufnehmen:</p>
-      <div style="display:flex;justify-content:center;gap:3rem;flex-wrap:wrap;">
-        <div><div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.15em;color:var(--text-muted);margin-bottom:0.5rem;">E-Mail</div><a href="mailto:hallo@zeniscale.de" style="color:var(--accent);font-weight:500;font-size:1.05rem;">hallo@zeniscale.de</a></div>
-        <div><div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.15em;color:var(--text-muted);margin-bottom:0.5rem;">Telefon</div><a href="tel:+4900000000" style="color:var(--accent);font-weight:500;font-size:1.05rem;">+49 (0) 000 000 000</a></div>
-        <div><div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.15em;color:var(--text-muted);margin-bottom:0.5rem;">Standort</div><span style="color:var(--text);font-weight:500;font-size:1.05rem;">Norddeutschland</span></div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:40px;">
+      <a href="#kontakt" class="btn-primary">
+        Kostenlos starten
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#produkt" class="btn-ghost">
+        Demo ansehen
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z" fill="currentColor"/></svg>
+      </a>
+    </div>
+
+    <!-- Social proof -->
+    <div style="display:flex;align-items:center;gap:12px;">
+      <!-- Avatars -->
+      <div style="display:flex;">
+        <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#fff,#aaa);border:2px solid #0a0a0a;display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:700;color:#0a0a0a;">M</div>
+        <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#888,#444);border:2px solid #0a0a0a;margin-left:-10px;display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:700;color:#fff;">S</div>
+        <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#ddd,#999);border:2px solid #0a0a0a;margin-left:-10px;display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:700;color:#0a0a0a;">A</div>
+        <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#666,#333);border:2px solid #0a0a0a;margin-left:-10px;display:flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:700;color:#ccc;">+20</div>
+      </div>
+      <div>
+        <div style="display:flex;gap:2px;margin-bottom:2px;">
+          <span style="color:#FFFFFF;font-size:0.75rem;">★★★★★</span>
+        </div>
+        <p style="margin:0;font-size:0.8rem;color:#8A8A8A;">Vertraut von <strong style="color:#F0F0F0;">23+ Unternehmen</strong></p>
       </div>
     </div>
   </div>
-</div>
 
-<div class="page" id="page-impressum">
-  <div class="page-header"><h1>Impressum</h1></div>
-  <div class="section-wrap" style="padding-top:1rem;">
-    <div class="reveal legal-content" style="max-width:680px;">
-      <h3>Angaben gemäß § 5 TMG</h3><p>Zeniscale<br>[Vorname Nachname]<br>[Straße Hausnummer]<br>[PLZ Ort]<br>Deutschland</p>
-      <h3>Kontakt</h3><p>Telefon: +49 (0) 000 000 000<br>E-Mail: hallo@zeniscale.de</p>
-      <h3>Umsatzsteuer-ID</h3><p>Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:<br>[USt-IdNr. eintragen oder löschen falls Kleinunternehmer]</p>
-      <h3>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</h3><p>[Vorname Nachname]<br>[Straße Hausnummer]<br>[PLZ Ort]</p>
-      <h3>Streitschlichtung</h3><p>Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: https://ec.europa.eu/consumers/odr/. Unsere E-Mail-Adresse finden Sie oben im Impressum. Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
-      <h3>Haftung für Inhalte</h3><p>Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.</p>
-      <h3>Haftung für Links</h3><p>Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber verantwortlich. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Links umgehend entfernen.</p>
-      <h3>Urheberrecht</h3><p>Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.</p>
+  <!-- Right — Phone mockup + floating card -->
+  <div style="position:relative;display:flex;justify-content:center;align-items:center;">
+    <!-- Glow background -->
+    <div style="position:absolute;width:320px;height:320px;background:radial-gradient(circle,rgba(255,255,255,0.06) 0%,transparent 70%);border-radius:50%;"></div>
+
+    <!-- Phone -->
+    <div class="phone-mockup" style="position:relative;z-index:2;">
+      <!-- Status bar -->
+      <div style="background:#0d0d0d;padding:12px 20px 8px;display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-size:0.7rem;font-weight:600;color:#fff;">9:41</span>
+        <div style="display:flex;gap:4px;align-items:center;">
+          <svg width="14" height="10" viewBox="0 0 14 10" fill="white" opacity="0.9"><rect x="0" y="4" width="2" height="6" rx="1"/><rect x="3" y="3" width="2" height="7" rx="1"/><rect x="6" y="1" width="2" height="9" rx="1"/><rect x="9" y="0" width="2" height="10" rx="1"/><rect x="12" y="2" width="2" height="8" rx="1"/></svg>
+          <svg width="15" height="10" viewBox="0 0 15 10" fill="none" stroke="white" stroke-width="1.5" opacity="0.9"><path d="M7.5 2C9.8 2 11.8 3 13.2 4.6M1.8 4.6C3.2 3 5.2 2 7.5 2M4.5 6.5C5.4 5.6 6.4 5 7.5 5s2.1.6 3 1.5M7.5 9h.01"/></svg>
+          <svg width="25" height="12" viewBox="0 0 25 12" fill="none" opacity="0.9"><rect x="0" y="1" width="22" height="10" rx="2" stroke="white" stroke-width="1.5"/><rect x="1.5" y="2.5" width="16" height="7" rx="1" fill="white"/><path d="M23 4v4" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+      </div>
+
+      <!-- Call screen -->
+      <div style="background:#111;padding:24px 20px 32px;min-height:400px;">
+        <!-- Incoming call header -->
+        <div style="text-align:center;margin-bottom:24px;">
+          <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);border-radius:100px;padding:4px 12px;margin-bottom:16px;">
+            <span style="width:6px;height:6px;border-radius:50%;background:#FF6B35;display:inline-block;animation:pulse 1.5s ease infinite;"></span>
+            <span style="font-size:0.7rem;font-weight:600;color:#FFFFFF;">KI-Gespräch aktiv</span>
+          </div>
+          <div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#fff,#bbb);margin:0 auto 12px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 24px rgba(255,255,255,0.2);">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="#0a0a0a"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
+          </div>
+          <p style="margin:0 0 2px;font-weight:700;font-size:1rem;color:#F0F0F0;">+49 89 1234 5678</p>
+          <p style="margin:0;font-size:0.75rem;color:#8A8A8A;">02:34 • Laufend</p>
+        </div>
+
+        <!-- Transcript -->
+        <div style="background:#161616;border-radius:14px;padding:16px;margin-bottom:16px;">
+          <p style="margin:0 0 8px;font-size:0.7rem;font-weight:600;color:#8A8A8A;text-transform:uppercase;letter-spacing:0.06em;">Live-Transkript</p>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <div style="background:#1E1E1E;border-radius:10px 10px 10px 2px;padding:10px 12px;max-width:85%;">
+              <p style="margin:0;font-size:0.75rem;color:#FFFFFF;font-weight:600;margin-bottom:3px;">KI</p>
+              <p style="margin:0;font-size:0.78rem;color:#D0D0D0;line-height:1.4;">Guten Tag! Zeniscale, hier spricht Ihr KI-Assistent. Wie kann ich Ihnen helfen?</p>
+            </div>
+            <div style="background:#1a1a1a;border-radius:10px 10px 2px 10px;padding:10px 12px;max-width:85%;align-self:flex-end;">
+              <p style="margin:0;font-size:0.75rem;color:#8A8A8A;font-weight:600;margin-bottom:3px;">Anrufer</p>
+              <p style="margin:0;font-size:0.78rem;color:#D0D0D0;line-height:1.4;">Ich interessiere mich für Ihre Leistungen…</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action chips -->
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <div style="background:#1E1E1E;border:1px solid #2a2a2a;border-radius:100px;padding:6px 12px;font-size:0.7rem;color:#8A8A8A;display:flex;align-items:center;gap:5px;">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M8 6l4-4 4 4M12 2v12M20 16l-4 4-4-4M12 22v-4"/></svg>
+            Weitergeleitet
+          </div>
+          <div style="background:#1E1E1E;border:1px solid #2a2a2a;border-radius:100px;padding:6px 12px;font-size:0.7rem;color:#8A8A8A;display:flex;align-items:center;gap:5px;">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+            Termin geplant
+          </div>
+        </div>
+      </div>
+
+      <!-- Home bar -->
+      <div style="background:#0d0d0d;padding:10px 0 6px;display:flex;justify-content:center;">
+        <div style="width:60px;height:4px;border-radius:2px;background:#333;"></div>
+      </div>
+    </div>
+
+    <!-- Floating stat card -->
+    <div style="position:absolute;top:16px;right:0px;background:#161616;border:1px solid #2a2a2a;border-radius:16px;padding:14px 18px;z-index:3;box-shadow:0 20px 40px rgba(0,0,0,0.5);">
+      <p style="margin:0 0 4px;font-size:0.7rem;color:#8A8A8A;font-weight:500;">Erreichbarkeit</p>
+      <p style="margin:0;font-size:1.8rem;font-weight:700;color:#FFFFFF;line-height:1;">24/7</p>
+      <div style="display:flex;align-items:center;gap:4px;margin-top:4px;">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+        <span style="font-size:0.7rem;color:#FFFFFF;font-weight:600;">100% verfügbar</span>
+      </div>
+    </div>
+
+    <!-- Second floating card (bottom left) -->
+    <div style="position:absolute;bottom:32px;left:-8px;background:#161616;border:1px solid #2a2a2a;border-radius:16px;padding:14px 18px;z-index:3;box-shadow:0 20px 40px rgba(0,0,0,0.5);">
+      <p style="margin:0 0 6px;font-size:0.7rem;color:#8A8A8A;font-weight:500;">Leads qualifiziert</p>
+      <div style="display:flex;align-items:flex-end;gap:3px;height:28px;">
+        <div style="width:6px;background:#2a2a2a;border-radius:2px;height:40%;"></div>
+        <div style="width:6px;background:#3a3a3a;border-radius:2px;height:60%;"></div>
+        <div style="width:6px;background:#555;border-radius:2px;height:50%;"></div>
+        <div style="width:6px;background:#888;border-radius:2px;height:80%;"></div>
+        <div style="width:6px;background:#FFFFFF;border-radius:2px;height:100%;"></div>
+      </div>
+      <p style="margin:4px 0 0;font-size:0.7rem;color:#FF6B35;font-weight:600;">+38% diesen Monat</p>
     </div>
   </div>
-</div>
+</section>
 
-<div class="page" id="page-datenschutz">
-  <div class="page-header"><h1>Datenschutz</h1></div>
-  <div class="section-wrap" style="padding-top:1rem;">
-    <div class="reveal legal-content" style="max-width:680px;">
-      <h3>1. Datenschutz auf einen Blick</h3><p>Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen.</p>
-      <h3>2. Verantwortliche Stelle</h3><p>Die verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist:<br><br>Zeniscale<br>[Vorname Nachname]<br>[Straße Hausnummer]<br>[PLZ Ort]<br><br>Telefon: +49 (0) 000 000 000<br>E-Mail: hallo@zeniscale.de</p>
-      <h3>3. Datenerfassung auf dieser Website</h3><p><strong style="color:var(--text);font-weight:500;">Kontaktformular:</strong> Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben zwecks Bearbeitung der Anfrage bei uns gespeichert. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter. Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO.</p>
-      <h3>4. Hosting</h3><p>Diese Website wird bei einem externen Dienstleister gehostet. Der Einsatz des Hosters erfolgt im Interesse einer sicheren, schnellen und effizienten Bereitstellung unseres Online-Angebots (Art. 6 Abs. 1 lit. f DSGVO).</p>
-      <h3>5. Ihre Rechte</h3><p>Sie haben jederzeit das Recht auf Auskunft über Herkunft, Empfänger und Zweck Ihrer gespeicherten personenbezogenen Daten. Sie haben außerdem ein Recht auf Berichtigung oder Löschung dieser Daten. Des Weiteren steht Ihnen ein Beschwerderecht bei der zuständigen Aufsichtsbehörde zu.</p>
-      <h3>6. Google Fonts</h3><p>Diese Seite nutzt zur einheitlichen Darstellung von Schriftarten sogenannte Google Fonts. Beim Aufruf einer Seite lädt Ihr Browser die benötigten Fonts in Ihren Browsercache. Die Nutzung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO.</p>
-      <h3>7. Änderung der Datenschutzerklärung</h3><p>Wir behalten uns vor, diese Datenschutzerklärung anzupassen, damit sie stets den aktuellen rechtlichen Anforderungen entspricht.</p>
+
+<!-- ══════════════════════════════════════════
+     INTEGRATION LOGOS
+══════════════════════════════════════════ -->
+<section style="border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06);padding:36px 32px;">
+  <div style="max-width:1200px;margin:0 auto;">
+    <p style="text-align:center;font-size:0.8rem;color:#8A8A8A;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;margin:0 0 28px;">Powered by</p>
+    <div style="display:flex;justify-content:center;align-items:center;gap:40px;flex-wrap:wrap;">
+      <!-- n8n -->
+      <div style="display:flex;align-items:center;gap:8px;opacity:0.45;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.75'" onmouseout="this.style.opacity='0.45'">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F0F0F0" stroke-width="2"><circle cx="5" cy="12" r="3"/><circle cx="19" cy="12" r="3"/><path d="M8 12h8"/><path d="M12 5v14"/></svg>
+        <span style="font-weight:600;color:#F0F0F0;font-size:0.95rem;">n8n</span>
+      </div>
+      <!-- Vapi.ai -->
+      <div style="display:flex;align-items:center;gap:8px;opacity:0.45;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.75'" onmouseout="this.style.opacity='0.45'">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F0F0F0" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4M8 23h8"/></svg>
+        <span style="font-weight:600;color:#F0F0F0;font-size:0.95rem;">Vapi.ai</span>
+      </div>
+      <!-- Google Workspace -->
+      <div style="display:flex;align-items:center;gap:8px;opacity:0.45;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.75'" onmouseout="this.style.opacity='0.45'">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F0F0F0" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        <span style="font-weight:600;color:#F0F0F0;font-size:0.95rem;">Google Workspace</span>
+      </div>
+      <!-- OpenAI -->
+      <div style="display:flex;align-items:center;gap:8px;opacity:0.45;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.75'" onmouseout="this.style.opacity='0.45'">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="#F0F0F0"><path d="M22.28 9.28a5.77 5.77 0 00-.52-4.76 5.83 5.83 0 00-6.27-2.8A5.77 5.77 0 0011.3 0a5.83 5.83 0 00-5.56 4.04 5.77 5.77 0 00-3.85 2.8 5.83 5.83 0 00.72 6.84 5.77 5.77 0 00.52 4.76 5.83 5.83 0 006.27 2.8A5.77 5.77 0 0012.7 24a5.83 5.83 0 005.57-4.04 5.77 5.77 0 003.85-2.8 5.83 5.83 0 00-.84-7.88zM12.7 22.4a4.32 4.32 0 01-2.77-1 .08.08 0 01.04-.01l4.6-2.66a.75.75 0 00.38-.65v-6.49l1.95 1.12a.07.07 0 01.04.06v5.38a4.34 4.34 0 01-4.24 4.25zm-9.3-3.97a4.32 4.32 0 01-.52-2.9.08.08 0 01.04.02l4.6 2.66a.75.75 0 00.75 0l5.62-3.25v2.25a.07.07 0 01-.03.06L9.2 20.1a4.34 4.34 0 01-5.8-1.67zM2.3 7.87a4.32 4.32 0 012.26-1.9V11.5a.75.75 0 00.38.65l5.62 3.24-1.95 1.13a.07.07 0 01-.07 0L3.97 13.8A4.34 4.34 0 012.3 7.87zm16.07 3.73l-5.62-3.25 1.95-1.12a.07.07 0 01.07 0l4.57 2.64a4.33 4.33 0 01-.67 7.82V12.25a.75.75 0 00-.3-.65zm1.94-2.92a.08.08 0 01-.04-.02l-4.6-2.66a.75.75 0 00-.75 0L9.3 9.25V7a.07.07 0 01.03-.06l4.57-2.64a4.34 4.34 0 016.41 4.38zM8.27 12.86l-1.95-1.13a.07.07 0 01-.04-.06V6.3a4.33 4.33 0 017.1-3.33.08.08 0 01-.04.01L8.75 5.64a.75.75 0 00-.38.65l-.1 6.57zm1.06-2.28L12 9l2.67 1.54v3.08L12 15.16l-2.67-1.54V10.58z"/></svg>
+        <span style="font-weight:600;color:#F0F0F0;font-size:0.95rem;">OpenAI</span>
+      </div>
+      <!-- Claude -->
+      <div style="display:flex;align-items:center;gap:8px;opacity:0.45;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.75'" onmouseout="this.style.opacity='0.45'">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="#F0F0F0">
+          <rect x="10.8" y="2" width="2.4" height="8" rx="1.2"/>
+          <rect x="10.8" y="2" width="2.4" height="8" rx="1.2" transform="rotate(32.7 12 12)"/>
+          <rect x="10.8" y="2" width="2.4" height="8" rx="1.2" transform="rotate(65.5 12 12)"/>
+          <rect x="10.8" y="2" width="2.4" height="8" rx="1.2" transform="rotate(98.2 12 12)"/>
+          <rect x="10.8" y="2" width="2.4" height="8" rx="1.2" transform="rotate(130.9 12 12)"/>
+          <rect x="10.8" y="2" width="2.4" height="8" rx="1.2" transform="rotate(163.6 12 12)"/>
+          <rect x="10.8" y="2" width="2.4" height="8" rx="1.2" transform="rotate(196.4 12 12)"/>
+          <rect x="10.8" y="2" width="2.4" height="8" rx="1.2" transform="rotate(229.1 12 12)"/>
+          <rect x="10.8" y="2" width="2.4" height="8" rx="1.2" transform="rotate(261.8 12 12)"/>
+          <rect x="10.8" y="2" width="2.4" height="8" rx="1.2" transform="rotate(294.5 12 12)"/>
+          <rect x="10.8" y="2" width="2.4" height="8" rx="1.2" transform="rotate(327.3 12 12)"/>
+        </svg>
+        <span style="font-weight:600;color:#F0F0F0;font-size:0.95rem;">Claude</span>
+      </div>
+      <!-- Gemini -->
+      <div style="display:flex;align-items:center;gap:8px;opacity:0.45;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.75'" onmouseout="this.style.opacity='0.45'">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="#F0F0F0"><path d="M12 2C12 7.523 16.477 12 22 12C16.477 12 12 16.477 12 22C12 16.477 7.523 12 2 12C7.523 12 12 7.523 12 2Z"/></svg>
+        <span style="font-weight:600;color:#F0F0F0;font-size:0.95rem;">Gemini</span>
+      </div>
+      <!-- Twilio -->
+      <div style="display:flex;align-items:center;gap:8px;opacity:0.45;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.75'" onmouseout="this.style.opacity='0.45'">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="#F0F0F0"><path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zm0 4.465a2.235 2.235 0 1 1 0 4.47 2.235 2.235 0 0 1 0-4.47zm5.604 3.135a2.235 2.235 0 1 1 0 4.47 2.235 2.235 0 0 1 0-4.47zm0 5.535a2.235 2.235 0 1 1 0 4.47 2.235 2.235 0 0 1 0-4.47zM12 19.535a2.235 2.235 0 1 1 0-4.47 2.235 2.235 0 0 1 0 4.47zm-5.604-3.135a2.235 2.235 0 1 1 0-4.47 2.235 2.235 0 0 1 0 4.47zm0-5.535a2.235 2.235 0 1 1 0-4.47 2.235 2.235 0 0 1 0 4.47z"/></svg>
+        <span style="font-weight:600;color:#F0F0F0;font-size:0.95rem;">Twilio</span>
+      </div>
+      <!-- Perplexity -->
+      <div style="display:flex;align-items:center;gap:8px;opacity:0.45;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.75'" onmouseout="this.style.opacity='0.45'">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F0F0F0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2v5M12 17v5M2 12h5M17 12h5M5.6 5.6l3.5 3.5M14.9 14.9l3.5 3.5M18.4 5.6l-3.5 3.5M9.1 14.9l-3.5 3.5"/>
+          <rect x="8.5" y="8.5" width="7" height="7" rx="1"/>
+        </svg>
+        <span style="font-weight:600;color:#F0F0F0;font-size:0.95rem;">Perplexity</span>
+      </div>
+      <!-- Pinecone -->
+      <div style="display:flex;align-items:center;gap:8px;opacity:0.45;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.75'" onmouseout="this.style.opacity='0.45'">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="#F0F0F0">
+          <circle cx="12" cy="19" r="1.5"/>
+          <path d="M12 2l1.4 3.2-.7-.2-.7.2z" transform="rotate(0 12 12)"/>
+          <path d="M12 2l1.4 3.2-.7-.2-.7.2z" transform="rotate(30 12 12)"/>
+          <path d="M12 2l1.4 3.2-.7-.2-.7.2z" transform="rotate(60 12 12)"/>
+          <path d="M12 2l1.4 3.2-.7-.2-.7.2z" transform="rotate(90 12 12)"/>
+          <path d="M12 2l1.4 3.2-.7-.2-.7.2z" transform="rotate(120 12 12)"/>
+          <path d="M12 2l1.4 3.2-.7-.2-.7.2z" transform="rotate(150 12 12)"/>
+          <path d="M12 2l1.4 3.2-.7-.2-.7.2z" transform="rotate(180 12 12)"/>
+          <path d="M12 2l1.4 3.2-.7-.2-.7.2z" transform="rotate(210 12 12)"/>
+          <path d="M12 2l1.4 3.2-.7-.2-.7.2z" transform="rotate(240 12 12)"/>
+          <path d="M12 2l1.4 3.2-.7-.2-.7.2z" transform="rotate(270 12 12)"/>
+          <path d="M12 2l1.4 3.2-.7-.2-.7.2z" transform="rotate(300 12 12)"/>
+          <path d="M12 2l1.4 3.2-.7-.2-.7.2z" transform="rotate(330 12 12)"/>
+        </svg>
+        <span style="font-weight:600;color:#F0F0F0;font-size:0.95rem;">Pinecone</span>
+      </div>
     </div>
   </div>
-</div>
+</section>
 
-<footer>
-  <span>© 2026 Zeniscale</span>
-  <div class="footer-links">
-    <a onclick="goTo('impressum')">Impressum</a>
-    <a onclick="goTo('datenschutz')">Datenschutz</a>
+
+<!-- ══════════════════════════════════════════
+     SERVICES — Bento Grid
+══════════════════════════════════════════ -->
+<section id="produkt" style="background:#0E0E0E;padding:100px 32px;position:relative;overflow:hidden;">
+  <!-- Background grid pattern -->
+  <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;"></div>
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(255,255,255,0.05),transparent);pointer-events:none;"></div>
+
+  <div style="max-width:1200px;margin:0 auto;position:relative;z-index:1;">
+
+    <!-- Header -->
+    <div style="text-align:center;margin-bottom:72px;">
+      <div class="section-tag" style="margin-bottom:20px;">LEISTUNGEN</div>
+      <h2 style="font-family:'DM Sans',sans-serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:700;line-height:1.1;letter-spacing:-0.03em;color:#F0F0F0;margin:0 0 16px;">
+        <span style="font-weight:300;color:rgba(255,255,255,0.55);">Ein System.</span>
+        <span style="font-weight:700;color:#FFFFFF;"> Drei Services.</span>
+      </h2>
+      <p style="font-size:1rem;color:#8A8A8A;max-width:440px;margin:0 auto;line-height:1.7;">
+        Alles, was Ihr Vertrieb braucht — vollautomatisiert, nahtlos verzahnt.
+      </p>
+    </div>
+
+    <!-- Row 1: 3 equal main service cards -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:12px;">
+
+      <!-- Card 1: AI-Telefonrezeptionist -->
+      <div class="bento-card">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+          <div class="bento-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.1 1.18 2 2 0 012.11 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.45-.45a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0120 15z"/></svg>
+          </div>
+          <span class="bento-status">24 / 7</span>
+        </div>
+
+        <h3 style="font-size:1.15rem;font-weight:700;color:#FFFFFF;letter-spacing:-0.025em;margin:0 0 10px;">AI-Telefonrezeptionist</h3>
+        <p style="font-size:0.875rem;color:rgba(255,255,255,0.5);line-height:1.65;margin:0 0 24px;">Nimmt jeden Anruf entgegen, qualifiziert den Lead und bucht den Termin — automatisch, ohne Personal.</p>
+
+        <!-- Visual: call waveform + stats -->
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:16px;margin-bottom:20px;">
+          <!-- Simulated waveform -->
+          <div style="display:flex;align-items:center;gap:3px;height:32px;margin-bottom:14px;">
+            <div style="width:3px;border-radius:2px;background:rgba(255,255,255,0.15);height:30%"></div>
+            <div style="width:3px;border-radius:2px;background:rgba(255,255,255,0.2);height:55%"></div>
+            <div style="width:3px;border-radius:2px;background:rgba(255,255,255,0.25);height:40%"></div>
+            <div style="width:3px;border-radius:2px;background:rgba(255,255,255,0.3);height:70%"></div>
+            <div style="width:3px;border-radius:2px;background:#FF6B35;height:90%"></div>
+            <div style="width:3px;border-radius:2px;background:#FF6B35;height:100%"></div>
+            <div style="width:3px;border-radius:2px;background:#FF6B35;height:85%"></div>
+            <div style="width:3px;border-radius:2px;background:rgba(255,255,255,0.3);height:60%"></div>
+            <div style="width:3px;border-radius:2px;background:rgba(255,255,255,0.2);height:45%"></div>
+            <div style="width:3px;border-radius:2px;background:rgba(255,255,255,0.15);height:30%"></div>
+            <div style="width:3px;border-radius:2px;background:rgba(255,255,255,0.2);height:50%"></div>
+            <div style="width:3px;border-radius:2px;background:rgba(255,255,255,0.25);height:75%"></div>
+            <div style="width:3px;border-radius:2px;background:rgba(255,255,255,0.3);height:55%"></div>
+            <div style="width:3px;border-radius:2px;background:rgba(255,255,255,0.15);height:35%"></div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+            <div>
+              <p style="margin:0 0 2px;font-size:0.65rem;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:0.05em;">Antwortzeit</p>
+              <p style="margin:0;font-size:1.3rem;font-weight:700;color:#FFFFFF;letter-spacing:-0.03em;">2 Sek</p>
+            </div>
+            <div>
+              <p style="margin:0 0 2px;font-size:0.65rem;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:0.05em;">Terminerfolg</p>
+              <p style="margin:0;font-size:1.3rem;font-weight:700;color:#FF6B35;letter-spacing:-0.03em;">100%</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-wrap:wrap;gap:6px;">
+          <span class="bento-tag">Voice Agent</span>
+          <span class="bento-tag">n8n</span>
+          <span class="bento-tag">Vapi.ai</span>
+        </div>
+      </div>
+
+      <!-- Card 2: Lead-Nurture Pipeline -->
+      <div class="bento-card">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+          <div class="bento-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          </div>
+          <span class="bento-status">Automatisch</span>
+        </div>
+
+        <h3 style="font-size:1.15rem;font-weight:700;color:#FFFFFF;letter-spacing:-0.025em;margin:0 0 10px;">Lead-Nurture Pipeline</h3>
+        <p style="font-size:0.875rem;color:rgba(255,255,255,0.5);line-height:1.65;margin:0 0 24px;">Automatisierte Kontaktsequenzen per SMS & E-Mail. Kein Lead wird vergessen — bis zur Entscheidung.</p>
+
+        <!-- Visual: funnel bars -->
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:16px;margin-bottom:20px;">
+          <p style="margin:0 0 12px;font-size:0.65rem;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:0.06em;">Kontakt-Sequenz</p>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <span style="font-size:0.7rem;color:rgba(255,255,255,0.4);width:80px;flex-shrink:0;">Erstkontakt</span>
+              <div style="flex:1;height:6px;border-radius:999px;background:rgba(255,255,255,0.18);"></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;">
+              <span style="font-size:0.7rem;color:rgba(255,255,255,0.4);width:80px;flex-shrink:0;">Follow-up</span>
+              <div style="width:75%;height:6px;border-radius:999px;background:rgba(255,255,255,0.18);"></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;">
+              <span style="font-size:0.7rem;color:rgba(255,255,255,0.4);width:80px;flex-shrink:0;">Qualifizierung</span>
+              <div style="width:50%;height:6px;border-radius:999px;background:rgba(255,255,255,0.18);"></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;">
+              <span style="font-size:0.7rem;color:rgba(255,255,255,0.55);width:80px;flex-shrink:0;font-weight:600;">Abschluss</span>
+              <div style="width:28%;height:6px;border-radius:999px;background:#FF6B35;"></div>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-wrap:wrap;gap:6px;">
+          <span class="bento-tag">SMS</span>
+          <span class="bento-tag">E-Mail</span>
+          <span class="bento-tag">n8n</span>
+        </div>
+      </div>
+
+      <!-- Card 3: Datenbank-Reaktivierung -->
+      <div class="bento-card">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+          <div class="bento-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          </div>
+          <span class="bento-status">Einmalig</span>
+        </div>
+
+        <h3 style="font-size:1.15rem;font-weight:700;color:#FFFFFF;letter-spacing:-0.025em;margin:0 0 10px;">Datenbank-Reaktivierung</h3>
+        <p style="font-size:0.875rem;color:rgba(255,255,255,0.5);line-height:1.65;margin:0 0 24px;">Hunderte schlafende Kontakte im CRM. Wir wecken sie — ohne ein einziges Euro Werbebudget.</p>
+
+        <!-- Visual: flow circles -->
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:20px 16px;margin-bottom:20px;">
+          <div style="display:flex;align-items:center;justify-content:center;gap:0;">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+              <div style="width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2"><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>
+              </div>
+              <span style="font-size:0.65rem;color:rgba(255,255,255,0.35);">Inaktiv</span>
+            </div>
+            <div style="flex:1;height:1px;background:rgba(255,255,255,0.12);margin:0 4px 16px;"></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+              <div style="width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.16);border:1px solid rgba(255,255,255,0.25);display:flex;align-items:center;justify-content:center;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              </div>
+              <span style="font-size:0.65rem;color:rgba(255,255,255,0.35);">Reaktiviert</span>
+            </div>
+            <div style="flex:1;height:1px;background:rgba(255,255,255,0.12);margin:0 4px 16px;"></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+              <div style="width:44px;height:44px;border-radius:50%;background:#FF6B35;border:1px solid rgba(255,107,53,0.6);display:flex;align-items:center;justify-content:center;box-shadow:0 0 20px rgba(255,107,53,0.3);">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <span style="font-size:0.65rem;color:rgba(255,255,255,0.5);font-weight:600;">Abschluss</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-wrap:wrap;gap:6px;">
+          <span class="bento-tag">CRM</span>
+          <span class="bento-tag">n8n</span>
+          <span class="bento-tag">Twilio</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Row 2: Metrics + Powered By -->
+    <div style="display:grid;grid-template-columns:2fr 1fr;gap:12px;">
+
+      <!-- Messbare Ergebnisse (wide) -->
+      <div class="bento-card" style="display:flex;align-items:center;gap:40px;flex-wrap:wrap;">
+        <div style="flex-shrink:0;">
+          <p style="margin:0 0 4px;font-size:0.7rem;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:0.06em;">In Zahlen</p>
+          <h3 style="font-size:1rem;font-weight:700;color:#FFFFFF;margin:0;">Messbare Ergebnisse</h3>
+        </div>
+        <div style="display:flex;gap:32px;flex-wrap:wrap;">
+          <div>
+            <p style="margin:0 0 2px;font-size:1.8rem;font-weight:700;color:#FFFFFF;letter-spacing:-0.04em;line-height:1;">24/7</p>
+            <p style="margin:0;font-size:0.75rem;color:rgba(255,255,255,0.4);">Erreichbarkeit</p>
+          </div>
+          <div>
+            <p style="margin:0 0 2px;font-size:1.8rem;font-weight:700;color:#FFFFFF;letter-spacing:-0.04em;line-height:1;">100%</p>
+            <p style="margin:0;font-size:0.75rem;color:rgba(255,255,255,0.4);">automatisiert</p>
+          </div>
+          <div>
+            <p style="margin:0 0 2px;font-size:1.8rem;font-weight:700;color:#FF6B35;letter-spacing:-0.04em;line-height:1;">3–4 Wo</p>
+            <p style="margin:0;font-size:0.75rem;color:rgba(255,255,255,0.4);">bis Go-live</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Powered By (narrow) -->
+      <div class="bento-card">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
+          <div class="bento-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <h3 style="font-size:0.9rem;font-weight:600;color:#FFFFFF;margin:0;">Powered by</h3>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:5px;">
+          <span class="bento-pill">n8n</span>
+          <span class="bento-pill">Vapi.ai</span>
+          <span class="bento-pill">OpenAI</span>
+          <span class="bento-pill">Claude</span>
+          <span class="bento-pill">Gemini</span>
+          <span class="bento-pill">Twilio</span>
+          <span class="bento-pill">Pinecone</span>
+          <span class="bento-pill">Google Workspace</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     STATS BANNER
+══════════════════════════════════════════ -->
+<section style="background:#060606;border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06);padding:80px 32px;">
+  <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;">
+
+    <!-- Stats -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;">
+      <div>
+        <p style="margin:0 0 4px;font-size:clamp(2.5rem,5vw,4rem);font-weight:700;color:#FFFFFF;line-height:1;letter-spacing:-0.04em;">24/7</p>
+        <p style="margin:0;font-size:0.9rem;color:rgba(255,255,255,0.5);font-weight:500;">Erreichbarkeit</p>
+      </div>
+      <div>
+        <p style="margin:0 0 4px;font-size:clamp(2.5rem,5vw,4rem);font-weight:700;color:#FF6B35;line-height:1;letter-spacing:-0.04em;">3–4 Wo</p>
+        <p style="margin:0;font-size:0.9rem;color:#8A8A8A;font-weight:500;">bis zum Go-live</p>
+      </div>
+      <div>
+        <p style="margin:0 0 4px;font-size:clamp(2.5rem,5vw,4rem);font-weight:700;color:#F0F0F0;line-height:1;letter-spacing:-0.04em;">100%</p>
+        <p style="margin:0;font-size:0.9rem;color:#8A8A8A;font-weight:500;">Lead-Qualifizierung</p>
+      </div>
+      <div>
+        <p style="margin:0 0 4px;font-size:clamp(2.5rem,5vw,4rem);font-weight:700;color:#F0F0F0;line-height:1;letter-spacing:-0.04em;">2 Wo</p>
+        <p style="margin:0;font-size:0.9rem;color:#8A8A8A;font-weight:500;">bis zur ersten KI</p>
+      </div>
+    </div>
+
+    <!-- Text -->
+    <div>
+      <div class="section-tag" style="margin-bottom:20px;">Ergebnisse</div>
+      <h2 style="font-family:'DM Sans',sans-serif;font-size:clamp(1.6rem,2.5vw,2.2rem);font-weight:700;line-height:1.2;letter-spacing:-0.02em;color:#F0F0F0;margin:0 0 16px;">
+        Vertrieb aufbauen,<br/>der skaliert.
+      </h2>
+      <p style="font-size:0.9rem;color:#8A8A8A;line-height:1.7;margin:0 0 28px;">
+        Unsere Kunden gewinnen täglich neue Leads, ohne zusätzliches Personal. Die KI arbeitet rund um die Uhr, damit Sie es nicht müssen.
+      </p>
+      <a href="#kontakt" class="btn-primary">Jetzt beraten lassen</a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     WHY ZENISCALE — Bento Grid
+══════════════════════════════════════════ -->
+<section style="padding:100px 32px;background:#060606;border-top:1px solid rgba(255,255,255,0.06);position:relative;overflow:hidden;">
+  <!-- Background grid pattern -->
+  <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;"></div>
+  <!-- Radial glow overlay -->
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(255,255,255,0.06),transparent);pointer-events:none;"></div>
+
+  <div style="max-width:1200px;margin:0 auto;position:relative;z-index:1;">
+
+    <!-- Header -->
+    <div style="margin-bottom:56px;">
+      <div class="section-tag" style="margin-bottom:16px;">Warum Zeniscale</div>
+      <h2 style="font-family:'DM Sans',sans-serif;font-size:clamp(1.8rem,3vw,2.4rem);font-weight:700;line-height:1.15;letter-spacing:-0.03em;color:#F0F0F0;margin:0;max-width:480px;">
+        Ihren Vertrieb.<br/>Gut automatisiert.
+      </h2>
+    </div>
+
+    <!-- Bento Grid -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;">
+
+      <!-- Card 1: Sofort einsatzbereit -->
+      <div class="bento-card">
+        <div class="bento-icon" style="margin-bottom:16px;">
+          <!-- Rocket icon -->
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 00-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 012-3.95A12.88 12.88 0 0122 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 01-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
+        </div>
+        <h3 style="font-size:1rem;font-weight:500;color:#FFFFFF;letter-spacing:-0.02em;margin:0 0 4px;">
+          Sofort einsatzbereit
+          <span style="font-size:0.75rem;color:#FF6B35;font-weight:500;margin-left:8px;">3–4 Wochen</span>
+        </h3>
+        <p style="font-size:0.85rem;color:rgba(255,255,255,0.5);line-height:1.7;margin:10px 0 0;">Kein monatelanges Projekt. Wir liefern ein fertiges, laufendes System — nicht ein Konzept. Die meisten Automationen sind in 3–4 Wochen live.</p>
+      </div>
+
+      <!-- Card 2: Keine Überraschungen -->
+      <div class="bento-card">
+        <div class="bento-icon" style="margin-bottom:16px;">
+          <!-- CheckCircle icon -->
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <h3 style="font-size:1rem;font-weight:500;color:#FFFFFF;letter-spacing:-0.02em;margin:0 0 8px;">Keine Überraschungen.</h3>
+        <p style="font-size:0.85rem;color:rgba(255,255,255,0.5);line-height:1.7;margin:0;">Was wir besprechen, ist was ihr bekommt. Klare Leistungen, klare Abläufe — vom ersten Gespräch bis zum Go-live.</p>
+      </div>
+
+      <!-- Card 3: Ihr System. Ihre Daten. -->
+      <div class="bento-card">
+        <div class="bento-icon" style="margin-bottom:16px;">
+          <!-- Server icon -->
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+        </div>
+        <h3 style="font-size:1rem;font-weight:500;color:#FFFFFF;letter-spacing:-0.02em;margin:0 0 8px;">Ihr System. Ihre Daten.</h3>
+        <p style="font-size:0.85rem;color:rgba(255,255,255,0.5);line-height:1.7;margin:0;">Jeder Kunde bekommt eine eigene Infrastruktur — keine geteilten Systeme, keine Abhängigkeit von Zeniscale.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     FAQ
+══════════════════════════════════════════ -->
+<section id="faq" style="padding:100px 32px;background:#0A0A0A;">
+  <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1.6fr;gap:80px;align-items:start;">
+
+    <!-- Left -->
+    <div style="position:sticky;top:88px;">
+      <div class="section-tag" style="margin-bottom:20px;">FAQ</div>
+      <h2 style="font-family:'DM Sans',sans-serif;font-size:clamp(1.8rem,2.5vw,2.4rem);font-weight:700;line-height:1.2;letter-spacing:-0.03em;color:#F0F0F0;margin:0 0 16px;">
+        Häufig gestellte<br/>Fragen
+      </h2>
+      <p style="font-size:0.9rem;color:#8A8A8A;line-height:1.7;margin:0 0 32px;">
+        Haben Sie weitere Fragen? Schreiben Sie uns. Wir antworten innerhalb von 24 Stunden.
+      </p>
+      <a href="#kontakt" class="btn-ghost">Kontakt aufnehmen</a>
+    </div>
+
+    <!-- Right: accordion -->
+    <div style="display:flex;flex-direction:column;gap:0;">
+
+      <details style="border-bottom:1px solid #222;padding:20px 0;" open>
+        <summary style="display:flex;justify-content:space-between;align-items:center;gap:16px;">
+          <span style="font-weight:600;color:#F0F0F0;font-size:0.95rem;">Wie schnell ist die KI einsatzbereit?</span>
+          <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8A8A8A" stroke-width="2" style="flex-shrink:0;"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <p style="margin:12px 0 0;font-size:0.88rem;color:#8A8A8A;line-height:1.7;">
+          Binnen 3-4 Wochen ist Ihr KI-Rezeptionist live inklusive Onboarding, Scripting, Integration in Ihr CRM und Testing. Sie müssen sich um nichts kümmern.
+        </p>
+      </details>
+
+      <details style="border-bottom:1px solid #222;padding:20px 0;">
+        <summary style="display:flex;justify-content:space-between;align-items:center;gap:16px;">
+          <span style="font-weight:600;color:#F0F0F0;font-size:0.95rem;">Wie menschlich klingt die KI-Stimme?</span>
+          <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8A8A8A" stroke-width="2" style="flex-shrink:0;"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <p style="margin:12px 0 0;font-size:0.88rem;color:#8A8A8A;line-height:1.7;">
+          Unsere KI verwendet modernste Sprachmodelle. Die Stimme klingt natürlich, flüssig und kann auf Fragen situativ eingehen. Die meisten Anrufer bemerken keinen Unterschied.
+        </p>
+      </details>
+
+      <details style="border-bottom:1px solid #222;padding:20px 0;">
+        <summary style="display:flex;justify-content:space-between;align-items:center;gap:16px;">
+          <span style="font-weight:600;color:#F0F0F0;font-size:0.95rem;">Mit welchen CRM-Systemen integriert Zeniscale?</span>
+          <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8A8A8A" stroke-width="2" style="flex-shrink:0;"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <p style="margin:12px 0 0;font-size:0.88rem;color:#8A8A8A;line-height:1.7;">
+          Wir integrieren nativ mit HubSpot, Salesforce, Pipedrive und über Zapier mit 5.000+ weiteren Tools. Auch individuelle Integrationen über API sind möglich.
+        </p>
+      </details>
+
+      <details style="border-bottom:1px solid #222;padding:20px 0;">
+        <summary style="display:flex;justify-content:space-between;align-items:center;gap:16px;">
+          <span style="font-weight:600;color:#F0F0F0;font-size:0.95rem;">Was passiert, wenn die KI eine Frage nicht beantworten kann?</span>
+          <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8A8A8A" stroke-width="2" style="flex-shrink:0;"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <p style="margin:12px 0 0;font-size:0.88rem;color:#8A8A8A;line-height:1.7;">
+          In diesem Fall leitet die KI das Gespräch nahtlos an einen menschlichen Mitarbeiter weiter, nimmt eine Nachricht auf oder bietet einen Rückruf an. Kein Anrufer bleibt unbeantwortet.
+        </p>
+      </details>
+
+      <details style="border-bottom:1px solid #222;padding:20px 0;">
+        <summary style="display:flex;justify-content:space-between;align-items:center;gap:16px;">
+          <span style="font-weight:600;color:#F0F0F0;font-size:0.95rem;">Für wen ist Zeniscale geeignet?</span>
+          <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8A8A8A" stroke-width="2" style="flex-shrink:0;"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <p style="margin:12px 0 0;font-size:0.88rem;color:#8A8A8A;line-height:1.7;">
+          Für inhabergeführte Unternehmen mit 5–50 Mitarbeitern, die täglich Anrufe, Leads oder Dokumente manuell bearbeiten und das automatisieren wollen. Typische Branchen: Zahnärzte, Handwerksbetriebe, Immobilienmakler, Kanzleien.
+        </p>
+      </details>
+
+      <details style="padding:20px 0;">
+        <summary style="display:flex;justify-content:space-between;align-items:center;gap:16px;">
+          <span style="font-weight:600;color:#F0F0F0;font-size:0.95rem;">Wie lange dauert die Einrichtung?</span>
+          <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8A8A8A" stroke-width="2" style="flex-shrink:0;"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <p style="margin:12px 0 0;font-size:0.88rem;color:#8A8A8A;line-height:1.7;">
+          Die meisten Systeme sind in wenigen Werktagen live. Wir übernehmen das komplette Setup ihr müsst nichts installieren oder konfigurieren.
+        </p>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     CTA SECTION
+══════════════════════════════════════════ -->
+<section id="kontakt" style="background:#060606;border-top:1px solid rgba(255,255,255,0.06);padding:120px 32px;position:relative;overflow:hidden;">
+  <!-- Radial glow -->
+  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:300px;background:radial-gradient(ellipse,rgba(255,255,255,0.06) 0%,transparent 70%);pointer-events:none;"></div>
+
+  <!-- Sparkle decorations -->
+  <div class="sparkle" style="position:absolute;top:40px;left:15%;font-size:2rem;color:#FFFFFF;opacity:0.3;pointer-events:none;">✦</div>
+  <div class="sparkle-2" style="position:absolute;top:60px;right:20%;font-size:1.2rem;color:#FFFFFF;opacity:0.25;pointer-events:none;">✦</div>
+  <div class="sparkle" style="position:absolute;bottom:50px;left:25%;font-size:1rem;color:#FFFFFF;opacity:0.2;pointer-events:none;">✦</div>
+  <div class="sparkle-2" style="position:absolute;bottom:40px;right:12%;font-size:2.5rem;color:#FFFFFF;opacity:0.15;pointer-events:none;">✦</div>
+
+  <div style="max-width:640px;margin:0 auto;text-align:center;position:relative;z-index:1;">
+    <div class="section-tag" style="margin-bottom:24px;">Bereit loszulegen?</div>
+    <h2 style="font-family:'DM Sans',sans-serif;font-size:clamp(2rem,4vw,3rem);font-weight:700;line-height:1.1;letter-spacing:-0.03em;color:#F0F0F0;margin:0 0 20px;">
+      Automatisierung,<br/>die verkauft.
+    </h2>
+    <p style="font-size:1rem;color:rgba(240,240,240,0.6);line-height:1.7;margin:0 0 40px;">
+      Vereinbaren Sie ein kostenloses Erstgespräch und sehen Sie, wie Zeniscale Ihren Vertrieb in 2 Wochen transformiert.
+    </p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <a href="mailto:kontakt@zeniscale.de" class="btn-primary" style="font-size:1rem;padding:14px 32px;">
+        Jetzt Erstgespräch buchen
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+    <p style="margin:20px 0 0;font-size:0.8rem;color:rgba(255,255,255,0.35);">Kostenlos · Unverbindlich · <span style="color:#FF6B35;font-weight:600;">Innerhalb von 24h</span> Antwort</p>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════ -->
+<footer style="background:#0A0A0A;border-top:1px solid rgba(255,255,255,0.06);padding:60px 32px 0;">
+  <div style="max-width:1200px;margin:0 auto;">
+
+    <!-- Top: links -->
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;padding-bottom:60px;border-bottom:1px solid rgba(255,255,255,0.06);">
+      <div>
+        <svg viewBox="0 0 360 72" height="48" style="display:block;margin-bottom:16px;">
+  <defs>
+    <filter id="gl-foot" x="-30%" y="-50%" width="160%" height="200%"><feGaussianBlur in="SourceGraphic" stdDeviation="7" result="b"/><feComposite in="SourceGraphic" in2="b" operator="over"/></filter>
+    <filter id="gll-foot" x="-20%" y="-400%" width="140%" height="900%"><feGaussianBlur in="SourceGraphic" stdDeviation="6"/></filter>
+  </defs>
+  <rect x="30" y="57" width="230" height="2.5" rx="1.25" fill="#FFFFFF" opacity="0.1" filter="url(#gll-foot)"/>
+  <rect x="30" y="58" width="230" height="1.5" rx="0.75" fill="#FFFFFF" opacity="0.25"/>
+  <text filter="url(#gl-foot)" x="30" y="50" font-family="Georgia,'Instrument Serif',serif" font-size="34" font-weight="400" font-style="italic" fill="#F5F0E8" letter-spacing="-0.5">zeni</text>
+  <text x="30" y="50" font-family="Georgia,'Instrument Serif',serif" font-size="34" font-weight="400" font-style="italic" fill="#F5F0E8" letter-spacing="-0.5">zeni</text>
+  <text filter="url(#gl-foot)" x="103" y="50" font-family="'DM Sans',sans-serif" font-size="32" font-weight="600" fill="#FFFFFF" letter-spacing="-1">scale</text>
+  <text x="103" y="50" font-family="'DM Sans',sans-serif" font-size="32" font-weight="600" fill="#FFFFFF" letter-spacing="-1">scale</text>
+</svg>
+        <p style="font-size:0.85rem;color:#8A8A8A;line-height:1.7;margin:0 0 20px;max-width:260px;">
+          Wir bauen KI-Systeme für lokale Unternehmen, die mehr Leads wollen ohne mehr Personal.
+        </p>
+        <div style="display:flex;gap:12px;">
+          <a href="#" style="width:32px;height:32px;border-radius:8px;background:#161616;border:1px solid #222;display:flex;align-items:center;justify-content:center;transition:border-color 0.2s;" onmouseover="this.style.borderColor='rgba(255,255,255,0.2)'" onmouseout="this.style.borderColor='#222'">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8A8A8A" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <a href="#" style="width:32px;height:32px;border-radius:8px;background:#161616;border:1px solid #222;display:flex;align-items:center;justify-content:center;transition:border-color 0.2s;" onmouseover="this.style.borderColor='rgba(255,255,255,0.2)'" onmouseout="this.style.borderColor='#222'">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8A8A8A" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <p style="font-size:0.75rem;font-weight:700;color:#F0F0F0;text-transform:uppercase;letter-spacing:0.08em;margin:0 0 16px;">Produkt</p>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <a href="#" style="font-size:0.85rem;color:#8A8A8A;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#F0F0F0'" onmouseout="this.style.color='#8A8A8A'">AI-Telefonrezeptionist</a>
+          <a href="#" style="font-size:0.85rem;color:#8A8A8A;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#F0F0F0'" onmouseout="this.style.color='#8A8A8A'">Lead-Nurture Pipeline</a>
+          <a href="#" style="font-size:0.85rem;color:#8A8A8A;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#F0F0F0'" onmouseout="this.style.color='#8A8A8A'">Datenbank-Reaktivierung</a>
+          <a href="#" style="font-size:0.85rem;color:#8A8A8A;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#F0F0F0'" onmouseout="this.style.color='#8A8A8A'">Integrationen</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="font-size:0.75rem;font-weight:700;color:#F0F0F0;text-transform:uppercase;letter-spacing:0.08em;margin:0 0 16px;">Unternehmen</p>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <a href="#" style="font-size:0.85rem;color:#8A8A8A;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#F0F0F0'" onmouseout="this.style.color='#8A8A8A'">Über uns</a>
+          <a href="#" style="font-size:0.85rem;color:#8A8A8A;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#F0F0F0'" onmouseout="this.style.color='#8A8A8A'">Karriere</a>
+          <a href="#" style="font-size:0.85rem;color:#8A8A8A;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#F0F0F0'" onmouseout="this.style.color='#8A8A8A'">Kontakt</a>
+        </div>
+      </div>
+
+      <div>
+        <p style="font-size:0.75rem;font-weight:700;color:#F0F0F0;text-transform:uppercase;letter-spacing:0.08em;margin:0 0 16px;">Rechtliches</p>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <a href="#" style="font-size:0.85rem;color:#8A8A8A;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#F0F0F0'" onmouseout="this.style.color='#8A8A8A'">Datenschutz</a>
+          <a href="#" style="font-size:0.85rem;color:#8A8A8A;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#F0F0F0'" onmouseout="this.style.color='#8A8A8A'">Impressum</a>
+          <a href="#" style="font-size:0.85rem;color:#8A8A8A;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#F0F0F0'" onmouseout="this.style.color='#8A8A8A'">AGB</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom: large wordmark -->
+    <div style="padding:40px 0;display:flex;justify-content:space-between;align-items:flex-end;overflow:hidden;">
+      <p style="margin:0;font-size:0.75rem;color:#3A3A3A;">© 2025 Zeniscale. Alle Rechte vorbehalten.</p>
+      <p style="margin:0;font-size:clamp(4rem,10vw,9rem);font-weight:700;letter-spacing:-0.04em;color:#161616;line-height:0.8;user-select:none;">zeniscale</p>
+    </div>
   </div>
 </footer>
 
-<script src="script.js"></script>
 <script>
-function handleSubmit(e) {
-  e.preventDefault();
-  document.getElementById('successPopup').style.display = 'flex';
-}
-function closePopup() {
-  document.getElementById('successPopup').style.display = 'none';
-  document.getElementById('contactForm').reset();
-}
+  // Mouse-following glow effect on bento cards
+  document.querySelectorAll('.bento-card, .bento-card-featured').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      card.style.setProperty('--glow-x', (e.clientX - r.left) + 'px');
+      card.style.setProperty('--glow-y', (e.clientY - r.top) + 'px');
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.setProperty('--glow-x', '-9999px');
+      card.style.setProperty('--glow-y', '-9999px');
+    });
+  });
 </script>
+
 </body>
 </html>
