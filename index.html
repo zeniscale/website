@@ -291,7 +291,7 @@
         position: relative !important;
         padding: 80px 24px 72px !important;
         min-height: 520px !important;
-        overflow: clip !important;
+        overflow: hidden !important;
       }
       .hero-section::after {
         content: '';
@@ -1332,7 +1332,7 @@
       var open = menu.style.display === 'flex';
       menu.style.display = open ? 'none' : 'flex';
       btn.setAttribute('aria-expanded', String(!open));
-      btn.innerHTML = open ? svgClose : svgMenu;
+      btn.innerHTML = open ? svgMenu : svgClose;
     });
     // Close when a menu link is clicked
     menu.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', closeMenu); });
