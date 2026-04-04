@@ -8,7 +8,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
-  <link rel="icon" type="image/x-png" href="/Logo favicon - zeniscale.png">
 
   <style>
     *, *::before, *::after { box-sizing: border-box; }
@@ -19,6 +18,24 @@
       font-family: 'DM Sans', system-ui, sans-serif;
       -webkit-font-smoothing: antialiased;
       margin: 0;
+      overflow-x: hidden;
+    }
+    .nav-hamburger-sub {
+      display: none;
+      background: none;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px;
+      padding: 7px;
+      color: #F0F0F0;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    @media (max-width: 768px) {
+      .nav-center-links { display: none !important; }
+      .nav-hamburger-sub { display: flex !important; }
+      .nav-back-link { display: none !important; }
     }
     body::before {
       content: '';
@@ -63,12 +80,17 @@
         <text x="103" y="50" font-family="'DM Sans',sans-serif" font-size="32" font-weight="600" fill="#FFFFFF" letter-spacing="-1">scale</text>
       </svg>
     </a>
-    <div style="display:flex;align-items:center;justify-content:center;gap:36px;">
+    <div class="nav-center-links" style="display:flex;align-items:center;justify-content:center;gap:36px;">
       <a href="index.html#produkt" class="nav-link">Leistungen</a>
       <a href="index.html#faq" class="nav-link">FAQ</a>
       <a href="mailto:hallo@zeniscale.com" class="nav-link">Kontakt</a>
     </div>
-    <a href="index.html" class="nav-link" style="color:#FF6B35;font-weight:600;justify-self:end;">← Zurück</a>
+    <div style="display:flex;align-items:center;gap:10px;justify-self:end;">
+      <a href="index.html" class="nav-link nav-back-link" style="color:#FF6B35;font-weight:600;">← Zurück</a>
+      <button id="nav-hamburger-sub" class="nav-hamburger-sub" aria-label="Menü öffnen" aria-expanded="false">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
   </div>
 </nav>
 
@@ -152,5 +174,28 @@
   </div>
 </footer>
 
+<div id="mobile-menu-sub" style="display:none;position:fixed;top:64px;left:0;right:0;bottom:0;background:rgba(10,10,10,0.97);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);flex-direction:column;align-items:flex-start;padding:40px 24px;gap:28px;z-index:98;border-top:1px solid rgba(255,255,255,0.06);overflow-y:auto;">
+  <a href="index.html#produkt" style="color:#F0F0F0;font-size:1.15rem;font-weight:500;text-decoration:none;">Leistungen</a>
+  <a href="index.html#faq" style="color:#F0F0F0;font-size:1.15rem;font-weight:500;text-decoration:none;">FAQ</a>
+  <a href="mailto:hallo@zeniscale.com" style="color:#F0F0F0;font-size:1.15rem;font-weight:500;text-decoration:none;">Kontakt</a>
+  <a href="index.html" style="color:#F0F0F0;font-size:1.15rem;font-weight:500;text-decoration:none;">← Zurück zur Startseite</a>
+</div>
+<script>
+  (function() {
+    var btn  = document.getElementById('nav-hamburger-sub');
+    var menu = document.getElementById('mobile-menu-sub');
+    if (!btn || !menu) return;
+    var svgMenu  = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
+    var svgClose = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
+    btn.addEventListener('click', function() {
+      var open = menu.style.display === 'flex';
+      menu.style.display = open ? 'none' : 'flex';
+      btn.setAttribute('aria-expanded', String(!open));
+      btn.innerHTML = open ? svgMenu : svgClose;
+    });
+  })();
+</script>
+
 </body>
 </html>
+
