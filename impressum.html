@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Impressum – Zeniscale</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: #0A0A0A;
+      color: #F0F0F0;
+      font-family: 'DM Sans', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      margin: 0;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-size: 128px 128px;
+    }
+    .nav-link {
+      color: #8A8A8A;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
+      text-decoration: none;
+    }
+    .nav-link:hover { color: #F0F0F0; }
+    h1 { font-family: 'DM Sans', sans-serif; }
+    h2 { font-family: 'DM Sans', sans-serif; font-size: 1.1rem; font-weight: 700; color: #F0F0F0; margin: 2rem 0 0.5rem; }
+    p, address { font-size: 0.95rem; line-height: 1.75; color: rgba(240,240,240,0.65); font-style: normal; }
+    a { color: #FF6B35; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #111; }
+    ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav style="position:sticky;top:0;z-index:100;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);background:rgba(10,10,10,0.85);border-bottom:1px solid rgba(255,255,255,0.06);">
+  <div style="max-width:1200px;margin:0 auto;padding:0 32px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:64px;">
+    <a href="index.html" style="display:flex;align-items:center;">
+      <svg viewBox="0 0 360 72" height="40" style="display:block;">
+        <defs>
+          <filter id="gl" x="-30%" y="-50%" width="160%" height="200%"><feGaussianBlur in="SourceGraphic" stdDeviation="7" result="b"/><feComposite in="SourceGraphic" in2="b" operator="over"/></filter>
+        </defs>
+        <text filter="url(#gl)" x="30" y="50" font-family="Georgia,'Instrument Serif',serif" font-size="34" font-weight="400" font-style="italic" fill="#F5F0E8" letter-spacing="-0.5">zeni</text>
+        <text x="30" y="50" font-family="Georgia,'Instrument Serif',serif" font-size="34" font-weight="400" font-style="italic" fill="#F5F0E8" letter-spacing="-0.5">zeni</text>
+        <text x="103" y="50" font-family="'DM Sans',sans-serif" font-size="32" font-weight="600" fill="#FFFFFF" letter-spacing="-1">scale</text>
+      </svg>
+    </a>
+    <div style="display:flex;align-items:center;justify-content:center;gap:36px;">
+      <a href="index.html#produkt" class="nav-link">Leistungen</a>
+      <a href="index.html#faq" class="nav-link">FAQ</a>
+      <a href="mailto:hallo@zeniscale.com" class="nav-link">Kontakt</a>
+    </div>
+    <a href="index.html" class="nav-link" style="color:#FF6B35;font-weight:600;justify-self:end;">← Zurück</a>
+  </div>
+</nav>
+
+<!-- CONTENT -->
+<main style="max-width:760px;margin:0 auto;padding:80px 32px 120px;">
+
+  <p style="font-size:0.75rem;color:#8A8A8A;text-transform:uppercase;letter-spacing:0.1em;margin:0 0 16px;">Rechtliches</p>
+  <h1 style="font-size:clamp(2rem,4vw,3rem);font-weight:700;letter-spacing:-0.03em;line-height:1.1;margin:0 0 16px;">Impressum</h1>
+  <p style="color:#8A8A8A;margin:0 0 48px;">Zeniscale</p>
+
+  <h2>Angaben gemäß § 5 TMG</h2>
+  <address>
+    Zeniscale<br/>
+    Paul Baumgarten &amp; Tim Schuster GbR
+  </address>
+  <address style="margin-top:1.25rem;">
+    Paul Baumgarten<br/>
+    Buschkamp 11<br/>
+    25364 Bokel<br/>
+    Deutschland
+  </address>
+  <address style="margin-top:1rem;">
+    Tim Schuster<br/>
+    Irena-Sendler-Straße 1A<br/>
+    25335 Elmshorn<br/>
+    Deutschland
+  </address>
+
+  <h2>Kontakt</h2>
+  <p>
+    Tel. Paul Baumgarten: <a href="tel:+491777745012">+49 1777 745012</a><br/>
+    Tel. Tim Schuster: <a href="tel:+4915563939211">+49 15563 939211</a><br/>
+    E-Mail: <a href="mailto:hallo@zeniscale.com">hallo@zeniscale.com</a>
+  </p>
+
+  <h2>Umsatzsteuer-ID</h2>
+  <p>
+    Umsatzsteuer-Identifikationsnummer gemäß § 27a Umsatzsteuergesetz:<br/>
+    [wird nachgetragen]
+  </p>
+
+  <h2>Verantwortlich für den Inhalt gemäß § 18 Abs. 2 MStV</h2>
+  <address>
+    Paul Baumgarten<br/>
+    Buschkamp 11, 25364 Bokel
+  </address>
+  <address style="margin-top:1rem;">
+    Tim Schuster<br/>
+    Irena-Sendler-Straße 1A, 25335 Elmshorn
+  </address>
+
+  <h2>EU-Streitschlichtung</h2>
+  <p>
+    Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:<br/>
+    <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener">https://ec.europa.eu/consumers/odr/</a><br/>
+    Unsere E-Mail-Adresse finden Sie oben im Impressum.
+  </p>
+
+  <h2>Verbraucherstreitbeilegung / Universalschlichtungsstelle</h2>
+  <p>
+    Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.
+  </p>
+
+  <div style="margin-top:64px;padding-top:32px;border-top:1px solid rgba(255,255,255,0.06);">
+    <p style="font-size:0.85rem;color:#5A5A5A;">
+      Stand: April 2026 | Zeniscale | <a href="mailto:hallo@zeniscale.com">hallo@zeniscale.com</a>
+    </p>
+  </div>
+
+</main>
+
+<!-- FOOTER MINIMAL -->
+<footer style="background:#0A0A0A;border-top:1px solid rgba(255,255,255,0.06);padding:32px;">
+  <div style="max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+    <p style="margin:0;font-size:0.75rem;color:#3A3A3A;">© 2026 Zeniscale. Alle Rechte vorbehalten.</p>
+    <div style="display:flex;gap:24px;">
+      <a href="datenschutz.html" style="font-size:0.8rem;color:#8A8A8A;text-decoration:none;" onmouseover="this.style.color='#F0F0F0'" onmouseout="this.style.color='#8A8A8A'">Datenschutz</a>
+      <a href="impressum.html" style="font-size:0.8rem;color:#FF6B35;text-decoration:none;">Impressum</a>
+      <a href="agb.html" style="font-size:0.8rem;color:#8A8A8A;text-decoration:none;" onmouseover="this.style.color='#F0F0F0'" onmouseout="this.style.color='#8A8A8A'">AGB</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
