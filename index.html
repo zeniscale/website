@@ -281,27 +281,7 @@
         grid-template-columns: auto 1fr !important;
         padding: 0 20px !important;
       }
-      .nav-links {
-        display: none;
-        position: fixed;
-        top: 64px;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(10,10,10,0.97);
-        -webkit-backdrop-filter: blur(16px);
-        backdrop-filter: blur(16px);
-        flex-direction: column !important;
-        align-items: flex-start;
-        padding: 40px 24px;
-        gap: 28px !important;
-        z-index: 98;
-        justify-content: flex-start !important;
-        border-top: 1px solid rgba(255,255,255,0.06);
-        overflow-y: auto;
-      }
-      .nav-links.is-open { display: flex !important; }
-      .nav-links .nav-link { font-size: 1.15rem !important; color: #F0F0F0 !important; }
+      .nav-links { display: none !important; }
       .nav-cta { display: none !important; }
       .nav-hamburger { display: flex !important; }
 
@@ -310,8 +290,8 @@
         display: block !important;
         position: relative !important;
         padding: 80px 24px 72px !important;
-        overflow: hidden !important;
         min-height: 520px !important;
+        overflow: clip !important;
       }
       .hero-section::after {
         content: '';
@@ -331,7 +311,7 @@
       .hero-left > div { justify-content: center !important; }
       .hero-right {
         position: absolute !important;
-        top: -24px !important;
+        top: 0 !important;
         left: 50% !important;
         transform: translateX(-50%) !important;
         width: 240px !important;
@@ -449,6 +429,17 @@
   </div>
 </nav>
 
+
+<!-- Mobile nav overlay (outside <nav> to avoid backdrop-filter containing-block bug) -->
+<div id="mobile-menu" style="display:none;position:fixed;top:64px;left:0;right:0;bottom:0;background:rgba(10,10,10,0.97);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);flex-direction:column;align-items:flex-start;padding:40px 24px;gap:28px;z-index:200;border-top:1px solid rgba(255,255,255,0.06);overflow-y:auto;">
+  <a href="#produkt" style="color:#F0F0F0;font-size:1.15rem;font-weight:500;text-decoration:none;">Leistungen</a>
+  <a href="#faq" style="color:#F0F0F0;font-size:1.15rem;font-weight:500;text-decoration:none;">FAQ</a>
+  <a href="mailto:hallo@zeniscale.com" style="color:#F0F0F0;font-size:1.15rem;font-weight:500;text-decoration:none;">Kontakt</a>
+  <a href="termin.html" class="btn-primary" style="margin-top:8px;">
+    Kostenfreies Erstgespräch
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  </a>
+</div>
 
 <!-- ══════════════════════════════════════════
      HERO
@@ -1327,26 +1318,27 @@
 
   // ── Mobile nav hamburger ──
   (function() {
-    var btn = document.getElementById('nav-hamburger');
-    var nav = document.querySelector('.nav-links');
-    if (!btn || !nav) return;
+    var btn  = document.getElementById('nav-hamburger');
+    var menu = document.getElementById('mobile-menu');
+    if (!btn || !menu) return;
     var svgMenu  = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
     var svgClose = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
     function closeMenu() {
-      nav.classList.remove('is-open');
+      menu.style.display = 'none';
       btn.setAttribute('aria-expanded', 'false');
       btn.innerHTML = svgMenu;
     }
     btn.addEventListener('click', function() {
-      var open = nav.classList.toggle('is-open');
-      btn.setAttribute('aria-expanded', String(open));
+      var open = menu.style.display === 'flex';
+      menu.style.display = open ? 'none' : 'flex';
+      btn.setAttribute('aria-expanded', String(!open));
       btn.innerHTML = open ? svgClose : svgMenu;
     });
-    // Close when a nav link is clicked
-    nav.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', closeMenu); });
-    // Close on outside tap
+    // Close when a menu link is clicked
+    menu.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', closeMenu); });
+    // Close on outside tap (neither nav nor menu)
     document.addEventListener('click', function(e) {
-      if (!e.target.closest('nav')) closeMenu();
+      if (!e.target.closest('nav') && !e.target.closest('#mobile-menu')) closeMenu();
     });
   })();
 
@@ -1377,4 +1369,3 @@
 
 </body>
 </html>
-
