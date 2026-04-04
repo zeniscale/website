@@ -8,7 +8,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
-  <link rel="icon" type="image/x-png" href="/Logo favicon - zeniscale.png">
 
   <script>
     tailwind.config = {
@@ -36,6 +35,7 @@
       font-family: 'DM Sans', system-ui, sans-serif;
       -webkit-font-smoothing: antialiased;
       margin: 0;
+      overflow-x: hidden;
     }
 
     /* Grain texture */
@@ -351,6 +351,17 @@
       .footer-wordmark { font-size: clamp(2.8rem, 12vw, 5rem) !important; line-height: 1 !important; }
     }
 
+    /* ── Scroll reveal ── */
+    .rf {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.55s cubic-bezier(0.16,1,0.3,1), transform 0.55s cubic-bezier(0.16,1,0.3,1);
+    }
+    .rf.in {
+      opacity: 1;
+      transform: none;
+    }
+
     /* ── Small phones (≤400px) ── */
     @media (max-width: 400px) {
       .footer-grid      { grid-template-columns: 1fr !important; }
@@ -400,7 +411,7 @@
         Kostenfreies Erstgespräch
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
-      <button class="nav-hamburger" aria-label="Menü öffnen" aria-expanded="false" onclick="(function(btn){var n=document.querySelector('.nav-links');var open=n.classList.toggle('is-open');btn.setAttribute('aria-expanded',open);btn.innerHTML=open?'<svg width=&quot;22&quot; height=&quot;22&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot;><line x1=&quot;18&quot; y1=&quot;6&quot; x2=&quot;6&quot; y2=&quot;18&quot;/><line x1=&quot;6&quot; y1=&quot;6&quot; x2=&quot;18&quot; y2=&quot;18&quot;/></svg>':'<svg width=&quot;22&quot; height=&quot;22&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot;><line x1=&quot;3&quot; y1=&quot;6&quot; x2=&quot;21&quot; y2=&quot;6&quot;/><line x1=&quot;3&quot; y1=&quot;12&quot; x2=&quot;21&quot; y2=&quot;12&quot;/><line x1=&quot;3&quot; y1=&quot;18&quot; x2=&quot;21&quot; y2=&quot;18&quot;/></svg>';})(this)">
+      <button id="nav-hamburger" class="nav-hamburger" aria-label="Menü öffnen" aria-expanded="false">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       </button>
     </div>
@@ -1270,7 +1281,7 @@
 </footer>
 
 <script>
-  // Mouse-following glow effect on bento cards
+  // ── Mouse-following glow on bento cards ──
   document.querySelectorAll('.bento-card, .bento-card-featured').forEach(card => {
     card.addEventListener('mousemove', e => {
       const r = card.getBoundingClientRect();
@@ -1282,6 +1293,55 @@
       card.style.setProperty('--glow-y', '-9999px');
     });
   });
+
+  // ── Mobile nav hamburger ──
+  (function() {
+    var btn = document.getElementById('nav-hamburger');
+    var nav = document.querySelector('.nav-links');
+    if (!btn || !nav) return;
+    var svgMenu  = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
+    var svgClose = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
+    function closeMenu() {
+      nav.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+      btn.innerHTML = svgMenu;
+    }
+    btn.addEventListener('click', function() {
+      var open = nav.classList.toggle('is-open');
+      btn.setAttribute('aria-expanded', String(open));
+      btn.innerHTML = open ? svgClose : svgMenu;
+    });
+    // Close when a nav link is clicked
+    nav.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', closeMenu); });
+    // Close on outside tap
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('nav')) closeMenu();
+    });
+  })();
+
+  // ── Scroll reveal ──
+  (function() {
+    var targets = Array.from(document.querySelectorAll('.bento-card, .bento-card-featured, .guarantee-card, details'));
+    // Group siblings for per-parent stagger
+    var parentMap = new Map();
+    targets.forEach(function(el) {
+      var p = el.parentElement;
+      if (!parentMap.has(p)) parentMap.set(p, []);
+      parentMap.get(p).push(el);
+    });
+    targets.forEach(function(el) {
+      var siblings = parentMap.get(el.parentElement);
+      var idx = siblings.indexOf(el);
+      el.classList.add('rf');
+      el.style.transitionDelay = (idx * 0.09) + 's';
+    });
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.06, rootMargin: '0px 0px -20px 0px' });
+    targets.forEach(function(el) { io.observe(el); });
+  })();
 </script>
 
 </body>
