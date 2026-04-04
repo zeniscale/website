@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AGB – Zeniscale</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: #0A0A0A;
+      color: #F0F0F0;
+      font-family: 'DM Sans', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      margin: 0;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-size: 128px 128px;
+    }
+    .nav-link {
+      color: #8A8A8A;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
+      text-decoration: none;
+    }
+    .nav-link:hover { color: #F0F0F0; }
+    h1 { font-family: 'DM Sans', sans-serif; }
+    h2 { font-family: 'DM Sans', sans-serif; font-size: 1.15rem; font-weight: 700; color: #F0F0F0; margin: 2.5rem 0 0.6rem; }
+    h3 { font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 600; color: rgba(240,240,240,0.85); margin: 1.5rem 0 0.4rem; }
+    p, li { font-size: 0.95rem; line-height: 1.75; color: rgba(240,240,240,0.65); }
+    ul, ol { padding-left: 1.5rem; margin: 0.5rem 0; }
+    a { color: #FF6B35; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #111; }
+    ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav style="position:sticky;top:0;z-index:100;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);background:rgba(10,10,10,0.85);border-bottom:1px solid rgba(255,255,255,0.06);">
+  <div style="max-width:1200px;margin:0 auto;padding:0 32px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:64px;">
+    <a href="index.html" style="display:flex;align-items:center;">
+      <svg viewBox="0 0 360 72" height="40" style="display:block;">
+        <defs>
+          <filter id="gl" x="-30%" y="-50%" width="160%" height="200%"><feGaussianBlur in="SourceGraphic" stdDeviation="7" result="b"/><feComposite in="SourceGraphic" in2="b" operator="over"/></filter>
+        </defs>
+        <text filter="url(#gl)" x="30" y="50" font-family="Georgia,'Instrument Serif',serif" font-size="34" font-weight="400" font-style="italic" fill="#F5F0E8" letter-spacing="-0.5">zeni</text>
+        <text x="30" y="50" font-family="Georgia,'Instrument Serif',serif" font-size="34" font-weight="400" font-style="italic" fill="#F5F0E8" letter-spacing="-0.5">zeni</text>
+        <text x="103" y="50" font-family="'DM Sans',sans-serif" font-size="32" font-weight="600" fill="#FFFFFF" letter-spacing="-1">scale</text>
+      </svg>
+    </a>
+    <div style="display:flex;align-items:center;justify-content:center;gap:36px;">
+      <a href="index.html#produkt" class="nav-link">Leistungen</a>
+      <a href="index.html#faq" class="nav-link">FAQ</a>
+      <a href="mailto:hallo@zeniscale.com" class="nav-link">Kontakt</a>
+    </div>
+    <a href="index.html" class="nav-link" style="color:#FF6B35;font-weight:600;justify-self:end;">← Zurück</a>
+  </div>
+</nav>
+
+<!-- CONTENT -->
+<main style="max-width:760px;margin:0 auto;padding:80px 32px 120px;">
+
+  <p style="font-size:0.75rem;color:#8A8A8A;text-transform:uppercase;letter-spacing:0.1em;margin:0 0 16px;">Rechtliches</p>
+  <h1 style="font-size:clamp(2rem,4vw,3rem);font-weight:700;letter-spacing:-0.03em;line-height:1.1;margin:0 0 16px;">Allgemeine Geschäftsbedingungen</h1>
+  <p style="color:#8A8A8A;margin:0 0 4px;">Zeniscale – KI-Automatisierungen für Unternehmen</p>
+  <p style="color:#8A8A8A;margin:0 0 48px;">Paul Baumgarten &amp; Tim Schuster</p>
+
+  <h2>§ 1 Geltungsbereich</h2>
+  <p>1.1. Diese Allgemeinen Geschäftsbedingungen regeln die Geschäftsbeziehungen zwischen dem Kunden (nachfolgend „Auftraggeber") und der Zeniscale GbR, bestehend aus Paul Baumgarten (Buschkamp 11, 25364 Bokel) und Tim Schuster (Irena-Sendler-Straße 1A, 25335 Elmshorn), (nachfolgend gemeinsam „Zeniscale" oder „Auftragnehmer").</p>
+  <p>1.2. Diese AGB gelten ausschließlich gegenüber Unternehmern im Sinne des § 14 BGB. Die Zusammenarbeit mit Verbrauchern im Sinne des § 13 BGB ist nicht Gegenstand dieser AGB.</p>
+  <p>1.3. Abweichende Allgemeine Geschäfts- oder Vertragsbedingungen des Auftraggebers werden nicht anerkannt, es sei denn, sie wurden ausdrücklich schriftlich bestätigt.</p>
+
+  <h2>§ 2 Vertragsgegenstand</h2>
+  <p>2.1. Zeniscale bietet professionelle KI-Automatisierungslösungen für Unternehmen an. Das Leistungsportfolio umfasst insbesondere:</p>
+  <ul>
+    <li><strong>Voice Agents:</strong> Entwicklung und Integration KI-gestützter Sprachagenten für automatisierte Kommunikation und Kundeninteraktion.</li>
+    <li><strong>Workflow-Automatisierungen:</strong> Konzeption, Entwicklung und Implementierung automatisierter Geschäftsprozesse mithilfe von KI-Tools und Plattformen wie n8n sowie weiteren Integrationsdiensten.</li>
+    <li><strong>KI-Beratung & Konzeption:</strong> Analyse bestehender Prozesse und Erarbeitung maßgeschneiderter Automatisierungsstrategien.</li>
+    <li><strong>Individuelle KI-Lösungen:</strong> Entwicklung kundenspezifischer KI-Anwendungen nach den Anforderungen des Auftraggebers.</li>
+    <li><strong>Wartung & Support:</strong> Laufende Betreuung, Optimierung und Weiterentwicklung implementierter Automatisierungslösungen im Rahmen von Retainer-Vereinbarungen.</li>
+  </ul>
+  <p>2.2. Der Auftraggeber beauftragt Zeniscale mit einzelnen oder mehreren Leistungsbestandteilen, deren Rechte und Pflichten in den folgenden Abschnitten geregelt sind.</p>
+
+  <h2>§ 3 Konkreter Leistungsumfang, Vertragsabschluss und Projektablauf</h2>
+  <p>3.1. Zeniscale erstellt ein individuelles Angebot mit Beschreibung der Leistungsbestandteile, des Umfangs, der Laufzeit sowie ggf. der genutzten Drittanbieter und Tools.</p>
+  <p>3.2. Der Vertrag kommt durch die Annahme des Angebots in Textform (z. B. per E-Mail) zustande. Angebot und Annahme werden Bestandteil des Vertrages.</p>
+  <p>3.3. Zeniscale kann zur Leistungserbringung Dritte (z. B. API-Anbieter, Plattformbetreiber, Subunternehmer) heranziehen, ohne dass diese Vertragspartner des Auftraggebers werden. Zeniscale informiert den Auftraggeber auf Wunsch über wesentliche eingesetzte Drittanbieter.</p>
+  <p>3.4. Der Zeitplan wird in Absprache der Vertragspartner erstellt und schriftlich dokumentiert. Zeniscale ist bestrebt, vereinbarte Fristen einzuhalten; Verzögerungen, die auf fehlende Mitwirkung des Auftraggebers oder Drittanbieter zurückzuführen sind, gehen nicht zu Lasten von Zeniscale.</p>
+  <p>3.5. Bei vorzeitiger Vertragsbeendigung durch den Auftraggeber hat dieser die bis zum Zeitpunkt der Beendigung erbrachten Leistungen vollständig zu vergüten.</p>
+
+  <h2>§ 4 Mitwirkungspflichten des Auftraggebers</h2>
+  <p>4.1. Der Auftraggeber stellt Zeniscale alle für die Leistungserbringung erforderlichen Informationen, Zugänge und Materialien rechtzeitig und vollständig zur Verfügung.</p>
+  <p>4.2. Der Auftraggeber benennt einen Ansprechpartner, der für Rückfragen und Entscheidungen während des Projekts zur Verfügung steht.</p>
+  <p>4.3. Verzögerungen, die auf fehlende oder verspätete Mitwirkung des Auftraggebers zurückzuführen sind, verlängern vereinbarte Fristen entsprechend und berechtigen Zeniscale zur Anpassung des Projektplans.</p>
+  <p>4.4. Der Auftraggeber ist dafür verantwortlich, dass die von ihm bereitgestellten Daten, Inhalte und Systeme den geltenden gesetzlichen Anforderungen entsprechen, insbesondere datenschutzrechtlichen Vorgaben (DSGVO).</p>
+
+  <h2>§ 5 Abnahmen</h2>
+  <p>5.1. Gegenstand der Abnahme ist die vertraglich geschuldete Leistung gemäß Angebot und Projektdokumentation.</p>
+  <p>5.2. Der Auftraggeber prüft die Abnahmefähigkeit der erbrachten Leistung unverzüglich, spätestens innerhalb von zwei Wochen nach Fertigstellungsmitteilung durch Zeniscale.</p>
+  <p>5.3. Festgestellte Mängel sind schriftlich zu dokumentieren. Zeniscale beseitigt wesentliche Mängel innerhalb angemessener Frist.</p>
+  <p>5.4. Unwesentliche Mängel berechtigen nicht zur Verweigerung der Abnahme. Sie werden nach Abnahme in einem gesonderten Nachbesserungsschritt behoben.</p>
+  <p>5.5. Reagiert der Auftraggeber nicht innerhalb der Prüffrist gemäß Ziffer 5.2, gilt die Leistung als abgenommen.</p>
+
+  <h2>§ 6 Regelungen zu Pitches und Konzeptpräsentationen</h2>
+  <p>6.1. Konzeptpräsentationen und Pitch-Unterlagen, die Zeniscale auf Anfrage des Auftraggebers erstellt, sind honorarpflichtig.</p>
+  <p>6.2. Die Höhe des Honorars wird vor der Präsentation schriftlich vereinbart.</p>
+  <p>6.3. Bei anschließender Auftragserteilung wird das Präsentationshonorar auf das Gesamthonorar angerechnet.</p>
+
+  <h2>§ 7 Vergütung, Fälligkeit und Zahlungsverzug</h2>
+  <p>7.1. Die Vergütung richtet sich nach dem individuellen Angebot. Es gelten die dort ausgewiesenen Preise zzgl. der gesetzlichen Umsatzsteuer.</p>
+  <p>7.2. Für Einzelprojekte ist die Vergütung innerhalb von 14 Tagen nach Rechnungserhalt ohne Abzug fällig.</p>
+  <p>7.3. Für Retainer-Verträge (monatliche Pauschalen) ist die Vergütung jeweils zum Ersten des Leistungsmonats im Voraus fällig, sofern im Angebot nichts anderes vereinbart ist.</p>
+  <p>7.4. Die Vergütung für erbrachte Leistungen ist unabhängig vom wirtschaftlichen Erfolg der Automatisierungslösung beim Auftraggeber zu entrichten.</p>
+  <p>7.5. Bei Zahlungsverzug ist Zeniscale berechtigt, Verzugszinsen in Höhe von 9 Prozentpunkten über dem jeweiligen Basiszinssatz (§ 288 Abs. 2 BGB) zu verlangen. Die Geltendmachung weitergehender Schäden bleibt vorbehalten.</p>
+  <p>7.6. Zeniscale behält sich vor, bei Zahlungsverzug laufende Leistungen (z. B. Retainer, Support) bis zum Ausgleich der offenen Forderungen auszusetzen.</p>
+
+  <h2>§ 8 Nutzungsrechte und geistiges Eigentum</h2>
+  <p>8.1. Zeniscale räumt dem Auftraggeber nach vollständiger Zahlung der vereinbarten Vergütung ein einfaches, nicht übertragbares Nutzungsrecht an den im Rahmen des Projekts entwickelten, individuellen Arbeitsergebnissen ein.</p>
+  <p>8.2. Allgemeine Methoden, Konzepte, Frameworks, Templates und Know-how, die Zeniscale in die Leistungserbringung einbringt oder im Zuge des Projekts entwickelt, verbleiben im Eigentum von Zeniscale und können für andere Projekte wiederverwendet werden.</p>
+  <p>8.3. Der Auftraggeber ist verantwortlich dafür, dass von ihm bereitgestellte Inhalte, Daten und Materialien frei von Rechten Dritter sind. Zeniscale haftet nicht für Rechtsverletzungen, die auf vom Auftraggeber bereitgestelltem Material beruhen.</p>
+
+  <h2>§ 9 Haftung</h2>
+  <p>9.1. Zeniscale haftet für Schäden, die durch Vorsatz oder grobe Fahrlässigkeit von Zeniscale, seinen gesetzlichen Vertretern oder Erfüllungsgehilfen verursacht wurden, unbeschränkt.</p>
+  <p>9.2. Bei einfacher Fahrlässigkeit haftet Zeniscale nur bei Verletzung wesentlicher Vertragspflichten (Kardinalpflichten), und zwar begrenzt auf den vorhersehbaren, vertragstypischen Schaden.</p>
+  <p>9.3. Wesentliche Vertragspflichten sind solche, deren Erfüllung die ordnungsgemäße Durchführung des Vertrags überhaupt erst ermöglicht und auf deren Einhaltung der Auftraggeber regelmäßig vertrauen darf.</p>
+  <p>9.4. Zeniscale haftet nicht für Ausfälle, Fehlfunktionen oder Datenverluste, die durch Drittanbieter (z. B. API-Dienste, Cloud-Plattformen, n8n) verursacht werden und außerhalb des Einflussbereichs von Zeniscale liegen.</p>
+  <p>9.5. Ansprüche für Schäden aus der Verletzung des Lebens, des Körpers oder der Gesundheit sowie nach dem Produkthaftungsgesetz bleiben von vorstehenden Haftungsbeschränkungen unberührt.</p>
+
+  <h2>§ 10 Kündigung und Laufzeit</h2>
+  <p>10.1. Einzelprojekte enden mit vollständiger Leistungserbringung und Abnahme gemäß § 5.</p>
+  <p>10.2. Retainer-Verträge werden mit einer Mindestlaufzeit gemäß Angebot abgeschlossen. Nach Ablauf der Mindestlaufzeit verlängern sie sich automatisch um jeweils einen Monat, sofern nicht mit einer Frist von 30 Tagen zum Monatsende schriftlich gekündigt wird.</p>
+  <p>10.3. Das Recht zur außerordentlichen Kündigung aus wichtigem Grund bleibt unberührt. Ein wichtiger Grund liegt insbesondere vor, wenn der Auftraggeber mit der Zahlung in Verzug ist und die Forderung trotz Mahnung nicht binnen 14 Tagen begleicht.</p>
+  <p>10.4. Bei Kündigung hat der Auftraggeber alle bis zum Wirksamwerden der Kündigung erbrachten Leistungen zu vergüten. Die Abrechnung erfolgt nach tatsächlich erbrachten Leistungen.</p>
+
+  <h2>§ 11 Geheimhaltung</h2>
+  <p>11.1. Beide Parteien verpflichten sich, alle im Rahmen der Zusammenarbeit erhaltenen vertraulichen Informationen der jeweils anderen Partei streng vertraulich zu behandeln und nicht an Dritte weiterzugeben.</p>
+  <p>11.2. Als vertraulich gelten insbesondere Geschäftsgeheimnisse, technische Konzepte, Kundendaten, Preisgestaltungen und strategische Planungen.</p>
+  <p>11.3. Die Geheimhaltungspflicht besteht auch nach Beendigung des Vertragsverhältnisses fort.</p>
+  <p>11.4. Von der Geheimhaltungspflicht ausgenommen sind Informationen, die dem Empfänger bereits bekannt waren, öffentlich zugänglich sind oder die der Empfänger rechtmäßig von Dritten erhalten hat.</p>
+
+  <h2>§ 12 Datenschutz</h2>
+  <p>12.1. Beide Parteien verpflichten sich, die geltenden datenschutzrechtlichen Bestimmungen, insbesondere die DSGVO, einzuhalten.</p>
+  <p>12.2. Soweit Zeniscale im Rahmen der Leistungserbringung personenbezogene Daten des Auftraggebers oder von dessen Kunden verarbeitet, schließen die Parteien einen gesonderten Auftragsverarbeitungsvertrag (AVV) gemäß Art. 28 DSGVO ab.</p>
+  <p>12.3. Der Auftraggeber ist für die datenschutzkonforme Nutzung der durch Zeniscale entwickelten Lösungen in seinem Unternehmen selbst verantwortlich.</p>
+
+  <h2>§ 13 Alternative Streitbeilegung</h2>
+  <p>13.1. Die EU-Kommission stellt im Internet unter folgendem Link eine Plattform zur Online-Streitbeilegung bereit: <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">https://ec.europa.eu/consumers/odr</a>. Da Zeniscale ausschließlich gegenüber Unternehmern tätig wird, ist diese Plattform für die Vertragsbeziehungen von Zeniscale nicht einschlägig.</p>
+  <p>13.2. Zeniscale ist nicht verpflichtet und nicht bereit, an einem Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+
+  <h2>§ 14 Änderung der AGB</h2>
+  <p>14.1. Zeniscale behält sich vor, diese AGB jederzeit zu ändern, es sei denn, dies ist für den Auftraggeber nicht zumutbar. Zeniscale wird den Auftraggeber über Änderungen rechtzeitig in Textform benachrichtigen.</p>
+  <p>14.2. Widerspricht der Auftraggeber der Geltung der neuen AGB nicht innerhalb von vier (4) Wochen nach Benachrichtigung, gelten die geänderten AGB als angenommen. Zeniscale wird in der Benachrichtigung auf dieses Widerspruchsrecht hinweisen.</p>
+  <p>14.3. Widerspricht der Auftraggeber fristgerecht, besteht das Vertragsverhältnis zu den ursprünglichen Bedingungen fort. Das Kündigungsrecht beider Parteien bleibt hiervon unberührt.</p>
+
+  <h2>§ 15 Schlussbestimmungen</h2>
+  <p>15.1. Für diese AGB und die Vertragsbeziehung zwischen den Parteien gilt ausschließlich das Recht der Bundesrepublik Deutschland unter Ausschluss des UN-Kaufrechts.</p>
+  <p>15.2. Ausschließlicher Gerichtsstand für alle Streitigkeiten aus oder im Zusammenhang mit diesem Vertrag ist der Geschäftssitz von Zeniscale (Bokel, Schleswig-Holstein), sofern der Auftraggeber Kaufmann, juristische Person des öffentlichen Rechts oder ein öffentlich-rechtliches Sondervermögen ist. Zeniscale ist in allen Fällen auch berechtigt, am allgemeinen Gerichtsstand des Auftraggebers zu klagen.</p>
+  <p>15.3. Sollten einzelne Bestimmungen dieser AGB unwirksam oder undurchführbar sein oder werden, bleibt die Wirksamkeit der übrigen Bestimmungen davon unberührt. Die unwirksame Bestimmung ist durch eine wirksame zu ersetzen, die dem wirtschaftlichen Zweck der unwirksamen Bestimmung am nächsten kommt.</p>
+  <p>15.4. Mündliche Nebenabreden bestehen nicht. Änderungen und Ergänzungen des Vertrages bedürfen der Textform.</p>
+
+  <div style="margin-top:64px;padding-top:32px;border-top:1px solid rgba(255,255,255,0.06);">
+    <p style="font-size:0.85rem;color:#5A5A5A;">
+      Stand: April 2026 | Zeniscale | <a href="mailto:hallo@zeniscale.com">hallo@zeniscale.com</a>
+    </p>
+  </div>
+
+</main>
+
+<!-- FOOTER MINIMAL -->
+<footer style="background:#0A0A0A;border-top:1px solid rgba(255,255,255,0.06);padding:32px;">
+  <div style="max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+    <p style="margin:0;font-size:0.75rem;color:#3A3A3A;">© 2026 Zeniscale. Alle Rechte vorbehalten.</p>
+    <div style="display:flex;gap:24px;">
+      <a href="datenschutz.html" style="font-size:0.8rem;color:#8A8A8A;text-decoration:none;" onmouseover="this.style.color='#F0F0F0'" onmouseout="this.style.color='#8A8A8A'">Datenschutz</a>
+      <a href="impressum.html" style="font-size:0.8rem;color:#8A8A8A;text-decoration:none;" onmouseover="this.style.color='#F0F0F0'" onmouseout="this.style.color='#8A8A8A'">Impressum</a>
+      <a href="agb.html" style="font-size:0.8rem;color:#FF6B35;text-decoration:none;">AGB</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
